@@ -20,13 +20,13 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
   sf::Texture texture;
   if(!texture.loadFromFile(filename))
   {
-    throw std::runtime_error("impossible de chatger image du player");
+    throw std::runtime_error("impossible de charger image du player");
 	}
-  sf::Sprite sprite;
-	sprite.setTexture(texture);
-	sf::Vector2f scale = sprite.getScale();
-	sprite.scale(scale.x * 1/12, scale.y * 1/12);
-  this->sprite = sprite;
+  sf::Sprite spritejoueur;
+  sf::Vector2f scale = spritejoueur.getScale();
+	spritejoueur.setTexture(texture);
+	spritejoueur.scale(scale.x * 1/12, scale.y * 1/12);
+  this->sprite = spritejoueur;
   cout << "fin player" << endl;
 }
 

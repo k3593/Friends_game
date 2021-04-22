@@ -7,14 +7,16 @@ int main(int argc, char ** argv)
 	float windowWidht = 1350;
     
     sf::RenderWindow window(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
-    Player p1(10, 10, 10, 10, "theo", "monica.png");
-    Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
-    
     sf::Image icone;
     if(!icone.loadFromFile("icone.png"))
 	{
-		throw std::runtime_error("impossible de chatger image de l'icone");
+		throw std::runtime_error("impossible de charger image de l'icone");
 	}	
+    window.setIcon(225, 225,icone.getPixelsPtr());
+    Player p1(10, 10, 10, 10, "theo", "monica.png");
+    Appartment appart(10, 10, 1350, 946, "appart", "apartment.png");
+    
+    
 
     while (window.isOpen())
     {
@@ -37,7 +39,7 @@ int main(int argc, char ** argv)
                 window.close();
         }
 
-        // gestion du déplacment d'un joueur (ne devrait pas etre une méthode ?)
+        /*// gestion du déplacment d'un joueur (ne devrait pas etre une méthode ?)
 		sf::Vector2f posMonica = p1.getSprite().getPosition();
 		float nx=posMonica.x;
 		float ny=posMonica.y;
@@ -65,7 +67,7 @@ int main(int argc, char ** argv)
 				ny = ny+1;
 			//}
 		}
-        p1.getSprite().setPosition(posMonica.x, posMonica.y+1);
+        p1.getSprite().setPosition(nx, ny);*/
 
         window.clear();
         window.draw(appart.getSprite());

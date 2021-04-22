@@ -56,7 +56,7 @@ class Appartment : public GameElement
 {
   public:
     //constructeurs
-    Appartment(int x, int y, int w, int h, string nom, string fileName);
+    Appartment(int x, int y, int w, int h, string nom, string filename);
     // destructeur
     ~Appartment() {}
     //Vérification de l'état d'une pièce
