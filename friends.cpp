@@ -85,12 +85,20 @@ Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
   cout << "Fin de l'initialisation d'un appartement" << endl;
 }
 
+void Appartment::addRoom(Room nom){
+  this->rooms.push_back(nom);
+  cout << "Ajout de la pièce terminé" << endl;
+}
+
 GameElement::~GameElement() {}
 
 //Player:: ~Player(){
 //	delete this->sprite;
 //}
 
+Room:: ~Room(){}
+
+/*
 Room:: ~Room(){
 	for (int i=0; i < this->l; i++)
   {
@@ -98,14 +106,25 @@ Room:: ~Room(){
   }
 	delete[] this->data;
 }
+*/
 
 int main(int argc, char ** argv)
 {
 
     float windowHeight = 721;
     float windowWidht = 1109;
+    //Création des joueurs
     Player p1(10, 10, 10, 10, "theo", "monica.png");
+    //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
+    //Création des pièces de l'appartement
+    Room room1(10, 10, 10, 10, 10, 10, "Bathroom");
+    Room room2(10, 10, 10, 10, 10, 10, "Bedroom");
+
+    //Remplissage de l'appartement avec les pièces
+    appart.addRoom(room1);
+    appart.addRoom(room2);
+
     sf::RenderWindow window(sf::VideoMode(windowWidht, windowHeight), "SFML works!");
 
     while (window.isOpen())

@@ -62,6 +62,5 @@ public:
 protected:
   sf::Texture texture;
   sf::Sprite sprite;
-  int nbrRoom;
-  vector <Room> rooms (int nbrRoom);
+  vector<Room> rooms;
 };
