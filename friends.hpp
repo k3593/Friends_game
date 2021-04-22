@@ -47,6 +47,15 @@ public:
   void affichage(sf::RenderWindow& window);
   //getters
   sf::RectangleShape& getRectangle() {return this->rectangle;}
+  sf::RectangleShape& operator() (int i, int j){
+    if(i > this->c || j > this->l){
+      throw std::out_of_range("ERREUR : Vous essayez d'acceder à un élément en dehors de la matrice !");
+    }
+    else{
+      return this->data[i][j];
+    }
+  }
+
 protected:
   int l; //nombre de lignes
 	int c; //nombre de colonnes

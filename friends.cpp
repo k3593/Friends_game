@@ -85,7 +85,23 @@ void Room::affichage(sf::RenderWindow& window){
 }
 
 void Room::state(Player nom){
+  int posXPlayer = nom.getX();
+  int posYPlayer = nom.getY();
+  int posXRoom = x;
+  int posYRoom = y;
+  int posLocalPlayerX = posXPlayer - posXRoom;
+  int posLocalPlayerY = posYPlayer - posYRoom;
 
+  for (int i=0; i<this->c; i++)
+  {
+    for (int j=0; j<this->l; j++)
+    {
+      if(i*(w/c)<posLocalPlayerX<(i+1)*(w/c) && j*(h/l)<posLocalPlayerX<(j+1)*(h/l)){
+        this(i,j).setOutlineColor(sf::Color::White);
+        this(i,j).setFillColor(sf::Color::Red);
+      }
+    }
+  }
 }
 
 //Constructeur Player
