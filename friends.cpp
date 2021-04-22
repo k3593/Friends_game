@@ -97,8 +97,8 @@ void Room::state(Player nom){
     for (int j=0; j<this->l; j++)
     {
       if(i*(w/c)<posLocalPlayerX<(i+1)*(w/c) && j*(h/l)<posLocalPlayerX<(j+1)*(h/l)){
-        this(i,j).setOutlineColor(sf::Color::White);
-        this(i,j).setFillColor(sf::Color::Red);
+        this->data[i][j].setOutlineColor(sf::Color::White);
+        this->data[i][j].setFillColor(sf::Color::Red);
       }
     }
   }
@@ -183,8 +183,10 @@ int main(int argc, char ** argv)
     appart.addRoom(room2);
 
     //Test de inRoom
-    appart.inRoom(p1);
-    //
+    Room room3 = appart.inRoom(p1);
+    room3.state(p1);
+    //Test opérateur ()
+
 
     sf::RenderWindow window(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
 
