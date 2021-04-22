@@ -1,7 +1,10 @@
 all : main
 
-main : main.o 
-	g++ -Wall -o main main.o -lsfml-graphics -lsfml-window -lsfml-system
+main : main.o friends.o
+	g++ -Wall -o main main.o friends.o -lsfml-graphics -lsfml-window -lsfml-system
+
+friends.o : friends.cpp friends.hpp
+	g++ -Wall -c friends.cpp 
 
 main.o: main.cpp friends.hpp 
 	g++ -Wall -c main.cpp

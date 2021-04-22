@@ -10,6 +10,7 @@ using namespace std;
 //Constructeur Player
 Player::Player(int x, int y, int w, int h, string nom, string filename)
 {
+  cout << "Debut player" << endl;
   this->x = x;
   this->y = y;
   this->w = w;
@@ -26,11 +27,13 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
 	sf::Vector2f scale = sprite.getScale();
 	sprite.scale(scale.x * 1/12, scale.y * 1/12);
   this->sprite = sprite;
+  cout << "fin player" << endl;
 }
 
 //Constructeur Room
 Room::Room(int l, int c, int x, int y, int w, int h, string nom)
 {
+  cout << "debut room" << endl;
   this->l = l;
   this->c = c;
   this->x = x;
@@ -56,11 +59,13 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
       data[i][j] = 0;
     }
   }
+  cout << "fin room" << endl;
 }
 
 //Constructeur Player
 Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
 {
+  cout << "debut apartment" << endl;
   this->x = x;
   this->y = y;
   this->w = w;
@@ -76,6 +81,7 @@ Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
   sf::Sprite spriteBackground;
 	spriteBackground.setTexture(background);
   this->sprite = spriteBackground;
+  cout << "fin appartment" << endl;
 }
 
 GameElement::~GameElement() {}
