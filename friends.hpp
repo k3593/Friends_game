@@ -31,6 +31,8 @@ public:
 	~Player() {}
   //getters
   sf::Sprite& getSprite() {return this->sprite;}
+  //update position
+  void update(int x, int y);
 protected:
   sf::Texture texture;
   sf::Sprite sprite;

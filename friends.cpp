@@ -31,6 +31,11 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
   cout << "Initialisation du joueur terminée" << endl;
 }
 
+void Player::update(int x, int y){
+  this->x = x;
+  this->y = y;
+}
+
 //Constructeur Room
 Room::Room(int l, int c, int x, int y, int w, int h, string nom)
 {
@@ -91,7 +96,6 @@ void Room::state(Player nom){
   int posYRoom = y;
   int posLocalPlayerX = posXPlayer - posXRoom;
   int posLocalPlayerY = posYPlayer - posYRoom;
-
   for (int i=0; i<this->c; i++)
   {
     for (int j=0; j<this->l; j++)
@@ -99,6 +103,7 @@ void Room::state(Player nom){
       if(i*(w/c)<posLocalPlayerX<(i+1)*(w/c) && j*(h/l)<posLocalPlayerX<(j+1)*(h/l)){
         this->data[i][j].setOutlineColor(sf::Color::White);
         this->data[i][j].setFillColor(sf::Color::Red);
+        cout << "bonjour" << endl;
       }
     }
   }
@@ -141,9 +146,9 @@ void Appartment::addPlayer(Player nom){
 //Cette fonction return l'adresse de la pièce dans laquelle le joueur se trouve.
 Room& Appartment::inRoom(Player player){
   for(int i=0; i<rooms.size(); i++){
-    if(rooms[i].getX()< player.getX()<rooms[i].getX()+rooms[i].getW() && rooms[i].getY()< player.getY() <rooms[i].getY()+rooms[i].getH()){
-      return(rooms[i]);
+    if((rooms[i].getX()<player.getX() && player.getX()<rooms[i].getX()+rooms[i].getW()) && rooms[i].getY()<player.getY() && player.getY()<rooms[i].getY()+rooms[i].getH()){
       cout << rooms[i].getName() << endl;
+      return(rooms[i]);
     }
   }
 }
@@ -172,20 +177,18 @@ int main(int argc, char ** argv)
     float windowHeight = 721;
     float windowWidht = 1109;
     //Création des joueurs
-    Player p1(10, 10, 10, 10, "theo", "monica.png");
+    Player p1(0, 0, 10, 10, "theo", "monica.png");
     //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
     //Création des pièces de l'appartement
-    Room room1(10, 10, 5, 10, 100, 100, "Bathroom");
-    Room room2(10, 10, 5, 10, 10, 10, "Bedroom");
+    Room room1(10, 10, 50, 100, 100, 100, "Bathroom");
+    Room room2(10, 10, 150, 150, 100, 100, "Bedroom");
     //Remplissage de l'appartement avec les pièces
     appart.addRoom(room1);
     appart.addRoom(room2);
 
-    //Test de inRoom
-    Room room3 = appart.inRoom(p1);
-    room3.state(p1);
-    //Test opérateur ()
+    //appart.inRoom(p1).state(p1);
+    //appart.inRoom(p1).state(p1);
 
 
     sf::RenderWindow window(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
@@ -211,26 +214,36 @@ int main(int argc, char ** argv)
 		sf::Vector2f posMonica = p1.getSprite().getPosition();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			p1.getSprite().setPosition(posMonica.x - 1, posMonica.y);
+      posMonica.x = posMonica.x-1;
+      posMonica.y = posMonica.y;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			p1.getSprite().setPosition(posMonica.x + 1, posMonica.y);
+      posMonica.x = posMonica.x + 1;
+      posMonica.y = posMonica.y;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			p1.getSprite().setPosition(posMonica.x, posMonica.y-1);
+      posMonica.x = posMonica.x;
+      posMonica.y = posMonica.y-1;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			p1.getSprite().setPosition(posMonica.x, posMonica.y+1);
+      posMonica.x = posMonica.x;
+      posMonica.y = posMonica.y + 1;
 		}
+        p1.getSprite().setPosition(posMonica.x, posMonica.y);
+        p1.update(posMonica.x, posMonica.y);
+        cout << p1.getX() << p1.getY() << endl;
         window.clear();
+        appart.inRoom(p1);
+        appart.inRoom(p1);
         window.draw(appart.getSprite());
         window.draw(p1.getSprite());
-		    window.draw(room1.getRectangle());
+        window.draw(room1.getRectangle());
         window.draw(room2.getRectangle());
         room1.affichage(window);
+        room2.affichage(window);
         window.display();
     }
 
