@@ -44,12 +44,13 @@ public:
 	~Room();
   //Vérification de l'état d'une pièce
   void state(Player nom);
+  //void affichage(sf::RenderWindow window);
   //getters
   sf::RectangleShape& getRectangle() {return this->rectangle;}
 protected:
   int l; //nombre de lignes
 	int c; //nombre de colonnes
-  double **data;
+  sf::RectangleShape **data;
   sf::RectangleShape rectangle;
 };
 

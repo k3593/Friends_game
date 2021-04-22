@@ -52,10 +52,10 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   this->rectangle = rectangle;
 
   //déclaration de la matrice
-  data = new double*[this->l];
+  data = new sf::RectangleShape*[this->l];
   for (int i=0; i<this->l; i=i+1)
   {
-    data[i] = new double[this->c];
+    data[i] = new sf::RectangleShape[this->c];
   }
   int j=0;
   //initialisation de la matrice
@@ -63,14 +63,30 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   {
     for (j=0; j<this->c; j=j+1)
     {
-      data[i][j] = 0;
+      sf::RectangleShape rectangle;
+      rectangle.setSize(sf::Vector2f(int(w/c), int(h/l)));
+      rectangle.setOutlineColor(sf::Color::Red);
+      rectangle.setOutlineThickness(1);
+      rectangle.setPosition(i, j);
+      rectangle.setFillColor(sf::Color::Transparent);
+      data[i][j] = rectangle;
     }
   }
   cout << "Fin de l'initialisation d'une pièce" << endl;
 }
-
+/*
+void Room::affichage(sf::RenderWindow window){
+  for (int i=0; i<this->l; i=i+1)
+  {
+    for (int j=0; j<this->c; j=j+1)
+    {
+      window.draw(data[i][j]);
+    }
+  }
+}
+*/
 void Room::state(Player nom){
-  
+
 }
 
 //Constructeur Player
@@ -87,7 +103,7 @@ Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
   sf::Texture background;
   if(!background.loadFromFile(filename))
   {
-    throw std::runtime_error("impossible de chatger image de l'appartment");
+    throw std::runtime_error("impossible de charger image de l'appartment");
 	}
   this->texture = background;
   sf::Sprite spriteBackground;
@@ -112,7 +128,7 @@ Room& Appartment::inRoom(Player player){
   for(int i=0; i<rooms.size(); i++){
     if(rooms[i].getX()< player.getX()<rooms[i].getX()+rooms[i].getW() && rooms[i].getY()< player.getY() <rooms[i].getY()+rooms[i].getH()){
       return(rooms[i]);
-      cout << rooms[i].getName();
+      cout << rooms[i].getName() << endl;
     }
   }
 }
@@ -197,7 +213,6 @@ int main(int argc, char ** argv)
         window.draw(p1.getSprite());
 		    window.draw(room1.getRectangle());
         window.draw(room2.getRectangle());
-        window.display();
     }
 
     return 0;
