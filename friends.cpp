@@ -90,17 +90,22 @@ void Room::affichage(sf::RenderWindow& window){
 }
 
 void Room::state(Player nom){
+  cout << "bonjour" << endl;
   int posXPlayer = nom.getX();
   int posYPlayer = nom.getY();
-  int posXRoom = x;
-  int posYRoom = y;
+  cout << "bonjour1" << endl;
+  int posXRoom = this->x;
+  cout << "bonjour2" << endl;
+  int posYRoom = this->y;
+  cout << "bonjour3" << endl;
   int posLocalPlayerX = posXPlayer - posXRoom;
   int posLocalPlayerY = posYPlayer - posYRoom;
+  cout << "bonjour" << endl;
   for (int i=0; i<this->c; i++)
   {
     for (int j=0; j<this->l; j++)
     {
-      if(i*(w/c)<posLocalPlayerX<(i+1)*(w/c) && j*(h/l)<posLocalPlayerX<(j+1)*(h/l)){
+      if(i*(w/c)<posLocalPlayerX && posLocalPlayerX<(i+1)*(w/c) && j*(h/l)<posLocalPlayerX && posLocalPlayerX<(j+1)*(h/l)){
         this->data[i][j].setOutlineColor(sf::Color::White);
         this->data[i][j].setFillColor(sf::Color::Red);
         cout << "bonjour" << endl;
@@ -148,6 +153,22 @@ Room& Appartment::inRoom(Player player){
   for(int i=0; i<rooms.size(); i++){
     if((rooms[i].getX()<player.getX() && player.getX()<rooms[i].getX()+rooms[i].getW()) && rooms[i].getY()<player.getY() && player.getY()<rooms[i].getY()+rooms[i].getH()){
       cout << rooms[i].getName() << endl;
+      int posXPlayer = player.getX();
+      int posYPlayer = player.getY();
+      int posXRoom = rooms[i].getX();
+      int posYRoom = rooms[i].getY();
+      int posLocalPlayerX = posXPlayer - posXRoom;
+      int posLocalPlayerY = posYPlayer - posYRoom;
+      for (int k=0; k<rooms[i].getC(); k++)
+      {
+        for (int j=0; j<rooms[i].getL(); j++)
+        {
+          if(k*(rooms[i].getW()/rooms[i].getC())<posLocalPlayerX && posLocalPlayerX<(k+1)*(rooms[i].getW()/rooms[i].getC()) && j*(rooms[i].getH()/rooms[i].getL())<posLocalPlayerX && posLocalPlayerX<(j+1)*(rooms[i].getH()/rooms[i].getL())){
+            rooms[i](k,j).setOutlineColor(sf::Color::White);
+            rooms[i](k,j).setFillColor(sf::Color::Red);
+          }
+        }
+      }
       return(rooms[i]);
     }
   }
@@ -234,9 +255,7 @@ int main(int argc, char ** argv)
 		}
         p1.getSprite().setPosition(posMonica.x, posMonica.y);
         p1.update(posMonica.x, posMonica.y);
-        cout << p1.getX() << p1.getY() << endl;
         window.clear();
-        appart.inRoom(p1);
         appart.inRoom(p1);
         window.draw(appart.getSprite());
         window.draw(p1.getSprite());

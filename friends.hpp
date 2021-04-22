@@ -48,6 +48,8 @@ public:
   void state(Player nom);
   void affichage(sf::RenderWindow& window);
   //getters
+  int getL() {return this->l;}
+  int getC() {return this->c;}
   sf::RectangleShape& getRectangle() {return this->rectangle;}
   sf::RectangleShape& operator() (int i, int j){
     if(i > this->c || j > this->l){
