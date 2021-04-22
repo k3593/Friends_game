@@ -10,6 +10,7 @@ using namespace std;
 //Constructeur Player
 Player::Player(int x, int y, int w, int h, string nom, string filename)
 {
+  cout << "Initialisation du joueur" << endl;
   this->x = x;
   this->y = y;
   this->w = w;
@@ -17,18 +18,23 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
   this->nom = nom;
   //Generation du sprite
   sf::Texture texture;
-	texture.loadFromFile(filename);
+  if(!texture.loadFromFile(filename))
+  {
+    throw std::runtime_error("impossible de charger image du player");
+	}
   this->texture = texture;
   sf::Sprite sprite;
 	sprite.setTexture(this->texture);
 	sf::Vector2f scale = sprite.getScale();
 	sprite.scale(scale.x * 1/12, scale.y * 1/12);
   this->sprite = sprite;
+  cout << "Initialisation du joueur terminée" << endl;
 }
 
 //Constructeur Room
 Room::Room(int l, int c, int x, int y, int w, int h, string nom)
 {
+  cout << "Initialisation d'une pièce" << endl;
   this->l = l;
   this->c = c;
   this->x = x;
@@ -52,11 +58,13 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
       data[i][j] = 0;
     }
   }
+  cout << "Fin de l'initialisation d'une pièce" << endl;
 }
 
 //Constructeur Player
 Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
 {
+  cout << "Initialisation d'un appartement" << endl;
   this->x = x;
   this->y = y;
   this->w = w;
@@ -65,11 +73,16 @@ Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
 
   //Generation du sprite
   sf::Texture background;
-	background.loadFromFile(filename);
+  if(!background.loadFromFile(filename))
+  {
+    throw std::runtime_error("impossible de chatger image de l'appartment");
+	}
   this->texture = background;
   sf::Sprite spriteBackground;
 	spriteBackground.setTexture(this->texture);
   this->sprite = spriteBackground;
+
+  cout << "Fin de l'initialisation d'un appartement" << endl;
 }
 
 GameElement::~GameElement() {}
@@ -105,7 +118,6 @@ int main(int argc, char ** argv)
         }
 
 		sf::Vector2f posMonica = p1.getSprite().getPosition();
-    std::cout << posMonica.x << posMonica.y;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 			p1.getSprite().setPosition(posMonica.x - 1, posMonica.y);

@@ -27,7 +27,7 @@ public:
   //Verifié dans quelle pièce le joueur est.
   //Room inRoom(vector<Room> rooms);
   //getters
-  sf::Sprite getSprite() {return this->sprite;}
+  sf::Sprite& getSprite() {return this->sprite;}
 protected:
   sf::Texture texture;
   sf::Sprite sprite;
@@ -57,7 +57,7 @@ public:
   void state();
   void addRoom(Room nom);
   //getters
-  sf::Sprite getSprite() {return this->sprite;}
+  sf::Sprite& getSprite() {return this->sprite;}
 
 protected:
   sf::Texture texture;
