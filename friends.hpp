@@ -43,11 +43,14 @@ public:
   // destructeur
 	~Room();
   //Vérification de l'état d'une pièce
-  void state();
+  void state(Player nom);
+  //getters
+  sf::RectangleShape& getRectangle() {return this->rectangle;}
 protected:
   int l; //nombre de lignes
 	int c; //nombre de colonnes
   double **data;
+  sf::RectangleShape rectangle;
 };
 
 class Appartment : public GameElement {
@@ -57,6 +60,7 @@ public:
   // destructeur
 	~Appartment() {}
   void addRoom(Room nom);
+  void addPlayer(Player nom);
   //getters
   sf::Sprite& getSprite() {return this->sprite;}
   //Verifié dans quelle pièce le joueur est.
@@ -65,4 +69,5 @@ protected:
   sf::Texture texture;
   sf::Sprite sprite;
   vector<Room> rooms;
+  vector<Player> players;
 };

@@ -43,6 +43,14 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   this->h = h;
   this->nom = nom;
 
+  sf::RectangleShape rectangle;
+  rectangle.setSize(sf::Vector2f(100, 50));
+  rectangle.setOutlineColor(sf::Color::Red);
+  rectangle.setOutlineThickness(5);
+  rectangle.setPosition(10, 20);
+  rectangle.setFillColor(sf::Color::Transparent);
+  this->rectangle = rectangle;
+
   //déclaration de la matrice
   data = new double*[this->l];
   for (int i=0; i<this->l; i=i+1)
@@ -61,15 +69,8 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   cout << "Fin de l'initialisation d'une pièce" << endl;
 }
 
-//Cette fonction return l'adresse de la pièce dans laquelle le joueur se trouve.
-Room& Appartment::inRoom(Player player){
-  for(int i=0; i<rooms.size(); i++){
-    cout << "bonjour";
-    if(rooms[i].getX()< player.getX()<rooms[i].getX()+rooms[i].getW() && rooms[i].getY()< player.getY() <rooms[i].getY()+rooms[i].getH()){
-      return(rooms[i]);
-      cout << rooms[i].getName();
-    }
-  }
+void Room::state(Player nom){
+  
 }
 
 //Constructeur Player
@@ -99,6 +100,21 @@ Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
 void Appartment::addRoom(Room nom){
   this->rooms.push_back(nom);
   cout << "Ajout de la pièce terminé" << endl;
+}
+
+void Appartment::addPlayer(Player nom){
+  this->players.push_back(nom);
+  cout << "Ajout du joueur terminé" << endl;
+}
+
+//Cette fonction return l'adresse de la pièce dans laquelle le joueur se trouve.
+Room& Appartment::inRoom(Player player){
+  for(int i=0; i<rooms.size(); i++){
+    if(rooms[i].getX()< player.getX()<rooms[i].getX()+rooms[i].getW() && rooms[i].getY()< player.getY() <rooms[i].getY()+rooms[i].getH()){
+      return(rooms[i]);
+      cout << rooms[i].getName();
+    }
+  }
 }
 
 GameElement::~GameElement() {}
@@ -137,16 +153,24 @@ int main(int argc, char ** argv)
 
     //Test de inRoom
     appart.inRoom(p1);
-
     //
 
-    sf::RenderWindow window(sf::VideoMode(windowWidht, windowHeight), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
 
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
+            if (event.type == sf::Event::Resized)
+            {
+                    // récupération de la taille de la fenêtre
+                    sf::Vector2u size = window.getSize();
+
+                    float ratio(windowHeight/windowWidht);
+                    size.y=(unsigned int) (ratio*size.x);
+                    window.setSize(size);
+            }
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -170,7 +194,9 @@ int main(int argc, char ** argv)
 		}
         window.clear();
         window.draw(appart.getSprite());
-		    window.draw(p1.getSprite());
+        window.draw(p1.getSprite());
+		    window.draw(room1.getRectangle());
+        window.draw(room2.getRectangle());
         window.display();
     }
 
