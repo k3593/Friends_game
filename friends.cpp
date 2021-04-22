@@ -74,7 +74,7 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   }
   cout << "Fin de l'initialisation d'une pièce" << endl;
 }
-/*
+
 void Room::affichage(sf::RenderWindow window){
   for (int i=0; i<this->l; i=i+1)
   {
@@ -84,7 +84,7 @@ void Room::affichage(sf::RenderWindow window){
     }
   }
 }
-*/
+
 void Room::state(Player nom){
 
 }
@@ -213,6 +213,7 @@ int main(int argc, char ** argv)
         window.draw(p1.getSprite());
 		    window.draw(room1.getRectangle());
         window.draw(room2.getRectangle());
+        window.display();
     }
 
     return 0;
