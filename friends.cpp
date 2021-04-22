@@ -44,38 +44,37 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   this->nom = nom;
 
   sf::RectangleShape rectangle;
-  rectangle.setSize(sf::Vector2f(100, 50));
+  rectangle.setSize(sf::Vector2f(w, h));
   rectangle.setOutlineColor(sf::Color::Red);
-  rectangle.setOutlineThickness(5);
-  rectangle.setPosition(10, 20);
+  rectangle.setOutlineThickness(2);
+  rectangle.setPosition(x, y);
   rectangle.setFillColor(sf::Color::Transparent);
   this->rectangle = rectangle;
 
   //déclaration de la matrice
-  data = new sf::RectangleShape*[this->l];
-  for (int i=0; i<this->l; i=i+1)
+  data = new sf::RectangleShape*[this->c];
+  for (int i=0; i<this->c; i=i+1)
   {
-    data[i] = new sf::RectangleShape[this->c];
+    data[i] = new sf::RectangleShape[this->l];
   }
-  int j=0;
   //initialisation de la matrice
-  for (int i=0; i<this->l; i=i+1)
+  for (int i=0; i<this->c; i++)
   {
-    for (j=0; j<this->c; j=j+1)
+    for (int j=0; j<this->l; j++)
     {
       sf::RectangleShape rectangle;
       rectangle.setSize(sf::Vector2f(int(w/c), int(h/l)));
       rectangle.setOutlineColor(sf::Color::Red);
       rectangle.setOutlineThickness(1);
-      rectangle.setPosition(i, j);
-      rectangle.setFillColor(sf::Color::Transparent);
+      rectangle.setPosition(x+i*(w/c), y+j*(h/l));
+      //rectangle.setFillColor(sf::Color::Transparent);
       data[i][j] = rectangle;
     }
   }
   cout << "Fin de l'initialisation d'une pièce" << endl;
 }
 
-void Room::affichage(sf::RenderWindow window){
+void Room::affichage(sf::RenderWindow& window){
   for (int i=0; i<this->l; i=i+1)
   {
     for (int j=0; j<this->c; j=j+1)
@@ -161,7 +160,7 @@ int main(int argc, char ** argv)
     //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
     //Création des pièces de l'appartement
-    Room room1(10, 10, 5, 10, 10, 10, "Bathroom");
+    Room room1(10, 10, 5, 10, 100, 100, "Bathroom");
     Room room2(10, 10, 5, 10, 10, 10, "Bedroom");
     //Remplissage de l'appartement avec les pièces
     appart.addRoom(room1);
@@ -213,6 +212,7 @@ int main(int argc, char ** argv)
         window.draw(p1.getSprite());
 		    window.draw(room1.getRectangle());
         window.draw(room2.getRectangle());
+        room1.affichage(window);
         window.display();
     }
 

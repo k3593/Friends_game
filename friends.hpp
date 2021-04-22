@@ -44,7 +44,7 @@ public:
 	~Room();
   //Vérification de l'état d'une pièce
   void state(Player nom);
-  //void affichage(sf::RenderWindow window);
+  void affichage(sf::RenderWindow& window);
   //getters
   sf::RectangleShape& getRectangle() {return this->rectangle;}
 protected:
