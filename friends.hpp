@@ -9,6 +9,11 @@ public:
   //constructeurs
   GameElement() {}
   virtual ~GameElement() = 0;
+  int getX() {return this->x;}
+  int getY() {return this->y;}
+  int getW() {return this->w;}
+  int getH() {return this->h;}
+  string getName() {return this->nom;}
 
 protected:
   int x; //Coordonnées x de l'origine
@@ -24,8 +29,6 @@ public:
   Player(int x, int y, int w, int h, string nom, string filename);
   // destructeur
 	~Player() {}
-  //Verifié dans quelle pièce le joueur est.
-  //Room inRoom(vector<Room> rooms);
   //getters
   sf::Sprite& getSprite() {return this->sprite;}
 protected:
@@ -53,12 +56,11 @@ public:
   Appartment(int x, int y, int w, int h, string nom, string fileName);
   // destructeur
 	~Appartment() {}
-  //Vérification de l'état d'une pièce
-  void state();
   void addRoom(Room nom);
   //getters
   sf::Sprite& getSprite() {return this->sprite;}
-
+  //Verifié dans quelle pièce le joueur est.
+  Room& inRoom(Player player);
 protected:
   sf::Texture texture;
   sf::Sprite sprite;

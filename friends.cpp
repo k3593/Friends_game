@@ -61,6 +61,17 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   cout << "Fin de l'initialisation d'une pièce" << endl;
 }
 
+//Cette fonction return l'adresse de la pièce dans laquelle le joueur se trouve.
+Room& Appartment::inRoom(Player player){
+  for(int i=0; i<rooms.size(); i++){
+    cout << "bonjour";
+    if(rooms[i].getX()< player.getX()<rooms[i].getX()+rooms[i].getW() && rooms[i].getY()< player.getY() <rooms[i].getY()+rooms[i].getH()){
+      return(rooms[i]);
+      cout << rooms[i].getName();
+    }
+  }
+}
+
 //Constructeur Player
 Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
 {
@@ -118,12 +129,16 @@ int main(int argc, char ** argv)
     //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
     //Création des pièces de l'appartement
-    Room room1(10, 10, 10, 10, 10, 10, "Bathroom");
-    Room room2(10, 10, 10, 10, 10, 10, "Bedroom");
-
+    Room room1(10, 10, 5, 10, 10, 10, "Bathroom");
+    Room room2(10, 10, 5, 10, 10, 10, "Bedroom");
     //Remplissage de l'appartement avec les pièces
     appart.addRoom(room1);
     appart.addRoom(room2);
+
+    //Test de inRoom
+    appart.inRoom(p1);
+
+    //
 
     sf::RenderWindow window(sf::VideoMode(windowWidht, windowHeight), "SFML works!");
 
