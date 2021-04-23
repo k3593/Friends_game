@@ -89,31 +89,6 @@ void Room::affichage(sf::RenderWindow& window){
   }
 }
 
-void Room::state(Player nom){
-  cout << "bonjour" << endl;
-  int posXPlayer = nom.getX();
-  int posYPlayer = nom.getY();
-  cout << "bonjour1" << endl;
-  int posXRoom = this->x;
-  cout << "bonjour2" << endl;
-  int posYRoom = this->y;
-  cout << "bonjour3" << endl;
-  int posLocalPlayerX = posXPlayer - posXRoom;
-  int posLocalPlayerY = posYPlayer - posYRoom;
-  cout << "bonjour" << endl;
-  for (int i=0; i<this->c; i++)
-  {
-    for (int j=0; j<this->l; j++)
-    {
-      if(i*(w/c)<posLocalPlayerX && posLocalPlayerX<(i+1)*(w/c) && j*(h/l)<posLocalPlayerX && posLocalPlayerX<(j+1)*(h/l)){
-        this->data[i][j].setOutlineColor(sf::Color::White);
-        this->data[i][j].setFillColor(sf::Color::Red);
-        cout << "bonjour" << endl;
-      }
-    }
-  }
-}
-
 //Constructeur Player
 Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
 {
@@ -157,15 +132,21 @@ Room& Appartment::inRoom(Player player){
       int posYPlayer = player.getY();
       int posXRoom = rooms[i].getX();
       int posYRoom = rooms[i].getY();
-      int posLocalPlayerX = posXPlayer - posXRoom;
-      int posLocalPlayerY = posYPlayer - posYRoom;
+      int posLocalPlayerX = (posXPlayer - posXRoom) + player.getW()/2;
+      int posLocalPlayerY = (posYPlayer - posYRoom) + player.getH()/2;
       for (int k=0; k<rooms[i].getC(); k++)
       {
         for (int j=0; j<rooms[i].getL(); j++)
         {
-          if(k*(rooms[i].getW()/rooms[i].getC())<posLocalPlayerX && posLocalPlayerX<(k+1)*(rooms[i].getW()/rooms[i].getC()) && j*(rooms[i].getH()/rooms[i].getL())<posLocalPlayerX && posLocalPlayerX<(j+1)*(rooms[i].getH()/rooms[i].getL())){
-            rooms[i](k,j).setOutlineColor(sf::Color::White);
-            rooms[i](k,j).setFillColor(sf::Color::Red);
+          if(k*(rooms[i].getW()/rooms[i].getC())<posLocalPlayerX && posLocalPlayerX<(k+1)*(rooms[i].getW()/rooms[i].getC()) && j*(rooms[i].getH()/rooms[i].getL())<posLocalPlayerY && posLocalPlayerY<(j+1)*(rooms[i].getH()/rooms[i].getL())){
+            if(player.getName().compare("joey") == 0){
+              rooms[i](k,j).setOutlineColor(sf::Color::White);
+              rooms[i](k,j).setFillColor(sf::Color::Red);
+            }
+            else{
+              rooms[i](k,j).setOutlineColor(sf::Color::Red);
+              rooms[i](k,j).setFillColor(sf::Color::White);
+            }
           }
         }
       }
@@ -198,7 +179,8 @@ int main(int argc, char ** argv)
     float windowHeight = 721;
     float windowWidht = 1109;
     //Création des joueurs
-    Player p1(0, 0, 10, 10, "theo", "monica.png");
+    Player p1(0, 0, 35, 35, "monica", "monica.png");
+    Player p2(0, 0, 35, 35, "joey", "monica.png");
     //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
     //Création des pièces de l'appartement
@@ -233,6 +215,7 @@ int main(int argc, char ** argv)
         }
 
 		sf::Vector2f posMonica = p1.getSprite().getPosition();
+    sf::Vector2f posJoey = p2.getSprite().getPosition();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
       posMonica.x = posMonica.x-1;
@@ -253,16 +236,42 @@ int main(int argc, char ** argv)
       posMonica.x = posMonica.x;
       posMonica.y = posMonica.y + 1;
 		}
+
+    //Joey
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		{
+      posJoey.x = posJoey.x-1;
+      posJoey.y = posJoey.y;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+      posJoey.x = posJoey.x + 1;
+      posJoey.y = posJoey.y;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+		{
+      posJoey.x = posJoey.x;
+      posJoey.y = posJoey.y-1;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+      posJoey.x = posJoey.x;
+      posJoey.y = posJoey.y + 1;
+		}
         p1.getSprite().setPosition(posMonica.x, posMonica.y);
         p1.update(posMonica.x, posMonica.y);
+        p2.getSprite().setPosition(posJoey.x, posJoey.y);
+        p2.update(posJoey.x, posJoey.y);
         window.clear();
         appart.inRoom(p1);
+        appart.inRoom(p2);
         window.draw(appart.getSprite());
-        window.draw(p1.getSprite());
         window.draw(room1.getRectangle());
         window.draw(room2.getRectangle());
         room1.affichage(window);
         room2.affichage(window);
+        window.draw(p1.getSprite());
+        window.draw(p2.getSprite());
         window.display();
     }
 

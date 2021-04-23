@@ -45,7 +45,6 @@ public:
   // destructeur
 	~Room();
   //Vérification de l'état d'une pièce
-  void state(Player nom);
   void affichage(sf::RenderWindow& window);
   //getters
   int getL() {return this->l;}
