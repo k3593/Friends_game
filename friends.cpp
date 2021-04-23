@@ -184,11 +184,17 @@ int main(int argc, char ** argv)
     //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
     //Création des pièces de l'appartement
-    Room room1(10, 10, 50, 100, 100, 100, "Bathroom");
-    Room room2(10, 10, 150, 150, 100, 100, "Bedroom");
+    Room room1(10, 10, 120, 370, 120, 120, "Bathroom");
+    Room room2(10, 10, 120, 500, 130, 130, "Bedroom");
+    Room room3(10, 10, 300, 400, 130, 130, "Living");
+    Room room4(10, 10, 850, 250, 110, 110, "Bedroom_Monica");
+    Room room5(10, 10, 850, 250, 110, 110, "Bathroom_Monica");
     //Remplissage de l'appartement avec les pièces
     appart.addRoom(room1);
     appart.addRoom(room2);
+    appart.addRoom(room3);
+    appart.addRoom(room4);
+    appart.addRoom(room5);
 
     //appart.inRoom(p1).state(p1);
     //appart.inRoom(p1).state(p1);
@@ -268,8 +274,12 @@ int main(int argc, char ** argv)
         window.draw(appart.getSprite());
         window.draw(room1.getRectangle());
         window.draw(room2.getRectangle());
+        window.draw(room3.getRectangle());
+        window.draw(room4.getRectangle());
         room1.affichage(window);
         room2.affichage(window);
+        room3.affichage(window);
+        room4.affichage(window);
         window.draw(p1.getSprite());
         window.draw(p2.getSprite());
         window.display();
