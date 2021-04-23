@@ -50,7 +50,7 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
 
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(w, h));
-  rectangle.setOutlineColor(sf::Color::Red);
+  rectangle.setOutlineColor(sf::Color::Transparent);
   rectangle.setOutlineThickness(2);
   rectangle.setPosition(x, y);
   rectangle.setFillColor(sf::Color::Transparent);
@@ -69,10 +69,10 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
     {
       sf::RectangleShape rectangle;
       rectangle.setSize(sf::Vector2f(int(w/c), int(h/l)));
-      rectangle.setOutlineColor(sf::Color::Red);
+      rectangle.setOutlineColor(sf::Color::Transparent);
       rectangle.setOutlineThickness(1);
       rectangle.setPosition(x+i*(w/c), y+j*(h/l));
-      //rectangle.setFillColor(sf::Color::Transparent);
+      rectangle.setFillColor(sf::Color::Transparent);
       data[i][j] = rectangle;
     }
   }
@@ -140,12 +140,12 @@ Room& Appartment::inRoom(Player player){
         {
           if(k*(rooms[i].getW()/rooms[i].getC())<posLocalPlayerX && posLocalPlayerX<(k+1)*(rooms[i].getW()/rooms[i].getC()) && j*(rooms[i].getH()/rooms[i].getL())<posLocalPlayerY && posLocalPlayerY<(j+1)*(rooms[i].getH()/rooms[i].getL())){
             if(player.getName().compare("joey") == 0){
-              rooms[i](k,j).setOutlineColor(sf::Color::White);
+              rooms[i](k,j).setOutlineColor(sf::Color::Transparent);
               rooms[i](k,j).setFillColor(sf::Color::Red);
             }
             else{
-              rooms[i](k,j).setOutlineColor(sf::Color::Red);
-              rooms[i](k,j).setFillColor(sf::Color::White);
+              rooms[i](k,j).setOutlineColor(sf::Color::Transparent);
+              rooms[i](k,j).setFillColor(sf::Color::Transparent);
             }
           }
         }
