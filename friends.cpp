@@ -180,17 +180,19 @@ int main(int argc, char ** argv)
     float windowWidht = 1109;
     //Création des joueurs
     Player p1(0, 0, 35, 35, "monica", "monica.png");
-    Player p2(0, 0, 35, 35, "joey", "monica.png");
+    Player p2(0, 0, 35, 35, "joey", "joey.png");
     //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
     //Création des pièces de l'appartement
     Room room1(10, 10, 120, 370, 120, 120, "Bathroom");
     Room room2(10, 10, 120, 500, 130, 130, "Bedroom");
-    Room room3(10, 10, 300, 400, 130, 130, "Living");
+    Room room3(10, 10, 280, 400, 180, 130, "Living");
     Room room4(10, 10, 850, 250, 110, 110, "Bedroom_Monica");
     Room room5(5, 5, 610, 220, 70, 80, "Bathroom_Monica");
     Room room6(8, 8, 610, 350, 200, 130, "Living_Monica");
-    Room room7(8, 8, 610, 350, 200, 130, "Living_Monica_2");
+    Room room7(6, 6, 690, 260, 120, 80, "Living_Monica_2");
+    Room room8(6, 6, 850, 400, 110, 100, "Guest_room");
+    Room room9(6, 6, 360, 220, 70, 80, "Bathroom_Joey");
     //Remplissage de l'appartement avec les pièces
     appart.addRoom(room1);
     appart.addRoom(room2);
@@ -199,6 +201,8 @@ int main(int argc, char ** argv)
     appart.addRoom(room5);
     appart.addRoom(room6);
     appart.addRoom(room7);
+    appart.addRoom(room8);
+    appart.addRoom(room9);
 
     //appart.inRoom(p1).state(p1);
     //appart.inRoom(p1).state(p1);
@@ -283,6 +287,8 @@ int main(int argc, char ** argv)
         window.draw(room5.getRectangle());
         window.draw(room6.getRectangle());
         window.draw(room7.getRectangle());
+        window.draw(room8.getRectangle());
+        window.draw(room9.getRectangle());
         room1.affichage(window);
         room2.affichage(window);
         room3.affichage(window);
@@ -290,6 +296,8 @@ int main(int argc, char ** argv)
         room5.affichage(window);
         room6.affichage(window);
         room7.affichage(window);
+        room8.affichage(window);
+        room9.affichage(window);
         window.draw(p1.getSprite());
         window.draw(p2.getSprite());
         window.display();
