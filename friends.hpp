@@ -33,6 +33,9 @@ class Player : public GameElement
     ~Player() {}
     //getters
     sf::Sprite& getSprite() {return this->sprite;}
+    int getRole() {return this->role;}
+    int getScore() {return this->score;}
+    void setScore(int s) {this->score=s;}
     //update position
     void update(int x, int y);
   protected:
@@ -54,6 +57,8 @@ class Room : public GameElement
     //getters
     int getL() {return this->l;}
     int getC() {return this->c;}
+    int getState(const int l, const int col) {return state[l][col];}
+    //methodes
     sf::RectangleShape& getRectangle() {return this->rectangle;}
     sf::RectangleShape& operator() (int i, int j){
       if(i > this->c || j > this->l){

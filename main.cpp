@@ -7,7 +7,7 @@ int main(int argc, char ** argv)
     float windowWidht = 1109;
     //Création des joueurs
     Player p1(0, 0, 35, 35, "monica", "monica.png");
-    Player p2(0, 0, 35, 35, "joey", "monica.png");
+    Player p2(0, 0, 35, 35, "joey", "joey.png");
     //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
     //Création des pièces de l'appartement
@@ -39,6 +39,9 @@ int main(int argc, char ** argv)
 		throw std::runtime_error("impossible de charger image de l'icone");
 	}	
     window.setIcon(225, 225,icone.getPixelsPtr());
+
+    appart.calculScore(p1);
+    appart.calculScore(p2);
 
     while (window.isOpen())
     {
@@ -106,8 +109,6 @@ int main(int argc, char ** argv)
         p1.update(posMonica.x, posMonica.y);
         p2.getSprite().setPosition(posJoey.x, posJoey.y);
         p2.update(posJoey.x, posJoey.y);
-        appart.calculScore(p1);
-        appart.calculScore(p2);
         window.clear();
         appart.inRoom(p1);
         appart.inRoom(p2);

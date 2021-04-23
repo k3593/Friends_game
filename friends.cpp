@@ -226,12 +226,15 @@ void Appartment::calculScore(Player nom)
   int i,j,k;
   for(i=0;i<this->rooms.size();i++)
   {
-    for(j=0;j<this->rooms[i].c;j++)
-      for(k=0;k<this->rooms[i].l;k++)
-        if(rooms[i].state[j][k]==nom.role)
-          nom.score++;
+    for(j=0;j<this->rooms[i].getC();j++)
+      for(k=0;k<this->rooms[i].getL();k++)
+        if(rooms[i].getState(j,k)==nom.getRole())
+        {
+          
+          nom.setScore(nom.getScore()+1);
+        }
   }
-  cout << nom.score << endl;
+  cout << "score de " << nom.getName() << nom.getScore() << endl;
 }
 
 GameElement::~GameElement() {}
