@@ -106,6 +106,8 @@ int main(int argc, char ** argv)
         p1.update(posMonica.x, posMonica.y);
         p2.getSprite().setPosition(posJoey.x, posJoey.y);
         p2.update(posJoey.x, posJoey.y);
+        appart.calculScore(p1);
+        appart.calculScore(p2);
         window.clear();
         appart.inRoom(p1);
         appart.inRoom(p2);

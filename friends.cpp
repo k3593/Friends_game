@@ -28,10 +28,16 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
 	sf::Vector2f scale = sprite.getScale();
 	sprite.scale(scale.x * 1/12, scale.y * 1/12);
   this->sprite = sprite;
+  this->score=0;
+  if (filename.compare("monica.png") == 0)
+    this->role=0;
+  else
+    this->role=1;
   cout << "Initialisation du joueur terminée" << endl;
 }
 
-void Player::update(int x, int y){
+void Player::update(int x, int y)
+{
   this->x = x;
   this->y = y;
 }
@@ -55,17 +61,17 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   rectangle.setPosition(x, y);
   rectangle.setFillColor(sf::Color::Transparent);
   this->rectangle = rectangle;
-
+  int i,j;
   //déclaration de la matrice
   data = new sf::RectangleShape*[this->c];
-  for (int i=0; i<this->c; i=i+1)
+  for (i=0; i<this->c; i=i+1)
   {
     data[i] = new sf::RectangleShape[this->l];
   }
   //initialisation de la matrice
-  for (int i=0; i<this->c; i++)
+  for (i=0; i<this->c; i++)
   {
-    for (int j=0; j<this->l; j++)
+    for (j=0; j<this->l; j++)
     {
       sf::RectangleShape rectangle;
       rectangle.setSize(sf::Vector2f(int(w/c), int(h/l)));
@@ -76,6 +82,66 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
       data[i][j] = rectangle;
     }
   }
+  // déclaration de la matrice state
+  state = new int*[this->c];
+  for ( i=0; i<this->c; i++)
+  {
+    state[i] = new int[this->l];
+  }
+  int cpt=0;//compteur de 1
+  //initialisation de la matrice state
+  for(i=0;i<this->c;i++)
+  {
+		for(j=0;j<this->l;j++)
+    {
+			state[i][j]=rand()%2;
+      if (state[i][j]==1)
+        cpt++;
+		}
+	}
+  int nb=(int)((this->c*this->l)/2);
+  //cout << nb << endl;
+  //cout << cpt << endl;
+  while ((cpt!=nb))// si il n'y a pas environ autant de 0 que de 1
+  {
+    int nl=rand()%l;
+    int nc=rand()%c;
+    if ((cpt<=(nb-1)))//si il y a plus de 0 que de 1 
+    {
+      if (state[nl][nc]==0)
+      {
+        state[nl][nc]=1;
+        cpt++;
+        //cout << cpt << endl;
+      }
+    }
+    else if ((cpt>=(nb+1)))//si il y a plus de 1 que de 0
+    {
+      if (state[nl][nc]==1)
+      {
+        state[nl][nc]=0;
+        cpt--;
+        //cout << cpt << endl;
+      }
+    }
+  }
+
+  //affichage de la matrice state
+  cout << this->nom << endl; 
+  cout << "state :" << endl;
+  cout << "[";
+  for ( i=0; i<this->c; i++)
+  { 
+      cout << " ";
+      for (int j=0; j<this->l; j++)
+      { 
+          cout << state[i][j] << " " ;
+      }
+      if (i != this->l-1)
+        cout << endl;
+  }
+  cout << "]" << endl;
+
   cout << "Fin de l'initialisation d'une pièce" << endl;
 }
 
@@ -89,7 +155,7 @@ void Room::affichage(sf::RenderWindow& window){
   }
 }
 
-//Constructeur Player
+//Constructeur appartment
 Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
 {
   cout << "Initialisation d'un appartement" << endl;
@@ -153,6 +219,19 @@ Room& Appartment::inRoom(Player player){
       return(rooms[i]);
     }
   }
+}
+
+void Appartment::calculScore(Player nom)
+{
+  int i,j,k;
+  for(i=0;i<this->rooms.size();i++)
+  {
+    for(j=0;j<this->rooms[i].c;j++)
+      for(k=0;k<this->rooms[i].l;k++)
+        if(rooms[i].state[j][k]==nom.role)
+          nom.score++;
+  }
+  cout << nom.score << endl;
 }
 
 GameElement::~GameElement() {}
