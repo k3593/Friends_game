@@ -29,6 +29,9 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
 	sprite.setTexture(this->texture);
 	sf::Vector2f scale = sprite.getScale();
 	sprite.scale(scale.x * 1/12, scale.y * 1/12);
+	sf::Vector2f scale = sprite.getScale();
+	this->w = scale.x;
+  	this->h = scale.y;
   this->sprite = sprite;
   cout << "Initialisation du joueur terminée" << endl;
 }
