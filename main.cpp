@@ -8,9 +8,14 @@ int main(int argc, char ** argv)
 
     float windowHeight = 721;
     float windowWidht = 1109;
+    //pour l'animation lors des deplacements
+    enum Dir{Down, Left, Right, Up};
+    sf::Vector2i anim1(1,Down);
+    sf::Vector2i anim2(1,Down);
+    bool updateFPS = true;
     //Création des joueurs
-    Player p1(0, 0, 35, 35, "monica", "monica.png");
-    Player p2(0, 0, 35, 35, "joey", "joey.png");
+    Player p1(0, 0, 144, 192, "monica", "monica.png");
+    Player p2(0, 0, 144, 192, "joey", "joey.png");
     //Création de l'appartement
     Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
     //Création des pièces de l'appartement
@@ -50,6 +55,11 @@ int main(int argc, char ** argv)
     appart.calculScore(p1);
     appart.calculScore(p2);
 
+    //création d'une horloge
+    sf::Clock time;
+    float countFps=0;
+    float switchFps=100;
+    float speedFps=500;
 
     while (window.isOpen())
     {
@@ -58,61 +68,93 @@ int main(int argc, char ** argv)
         {
             if (event.type == sf::Event::Resized)
             {
-                    // récupération de la taille de la fenêtre
-                    sf::Vector2u size = window.getSize();
+                // récupération de la taille de la fenêtre
+                sf::Vector2u size = window.getSize();
 
-                    float ratio(windowHeight/windowWidht);
-                    size.y=(unsigned int) (ratio*size.x);
-                    window.setSize(size);
+                float ratio(windowHeight/windowWidht);
+                size.y=(unsigned int) (ratio*size.x);
+                window.setSize(size);
             }
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
-		sf::Vector2f posMonica = p1.getSprite().getPosition();
-    sf::Vector2f posJoey = p2.getSprite().getPosition();
+	    sf::Vector2f posMonica = p1.getSprite().getPosition();
+        sf::Vector2f posJoey = p2.getSprite().getPosition();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-      posMonica.x = posMonica.x-1;
-      posMonica.y = posMonica.y;
+            anim1.y=Left;
+            posMonica.x = posMonica.x-1;
+            posMonica.y = posMonica.y;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-      posMonica.x = posMonica.x + 1;
-      posMonica.y = posMonica.y;
+            anim1.y=Right;
+            posMonica.x = posMonica.x + 1;
+            posMonica.y = posMonica.y;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-      posMonica.x = posMonica.x;
-      posMonica.y = posMonica.y-1;
+            anim1.y=Up;
+            posMonica.x = posMonica.x;
+            posMonica.y = posMonica.y-1;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-      posMonica.x = posMonica.x;
-      posMonica.y = posMonica.y + 1;
+            anim1.y=Down;
+            posMonica.x = posMonica.x;
+            posMonica.y = posMonica.y + 1;
 		}
 
-    //Joey
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+        //Joey
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		{
-      posJoey.x = posJoey.x-1;
-      posJoey.y = posJoey.y;
+            anim2.y=Left;
+            posJoey.x = posJoey.x-1;
+            posJoey.y = posJoey.y;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-      posJoey.x = posJoey.x + 1;
-      posJoey.y = posJoey.y;
+            anim2.y=Right;
+            posJoey.x = posJoey.x + 1;
+            posJoey.y = posJoey.y;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 		{
-      posJoey.x = posJoey.x;
-      posJoey.y = posJoey.y-1;
+            anim2.y=Up;
+            posJoey.x = posJoey.x;
+            posJoey.y = posJoey.y-1;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-      posJoey.x = posJoey.x;
-      posJoey.y = posJoey.y + 1;
+            anim2.y=Down;
+            posJoey.x = posJoey.x;
+            posJoey.y = posJoey.y + 1;
 		}
+        //animation
+        if(updateFPS)
+            countFps+=speedFps*time.restart().asSeconds();
+        else
+            countFps=0;
+
+        if(countFps>=switchFps)
+        {
+            anim1.x++;
+            if(anim1.x*48 >= p1.getW()*3)
+                anim1.x=0;
+            sf::Sprite s1=p1.getSprite();
+            s1.setTextureRect(sf::IntRect(anim1.x*48, anim1.y*48, 48, 48));
+            p1.setSprite(s1);
+
+            anim2.x++;
+            if(anim2.x*48 >= p2.getW()*3)
+                anim2.x=0;
+            sf::Sprite s2=p2.getSprite();
+            s2.setTextureRect(sf::IntRect(anim2.x*48, anim2.y*48, 48, 48));
+            p2.setSprite(s2);
+        }
+        
+
         p1.getSprite().setPosition(posMonica.x, posMonica.y);
         p1.update(posMonica.x, posMonica.y);
         p2.getSprite().setPosition(posJoey.x, posJoey.y);

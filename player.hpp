@@ -19,8 +19,11 @@ class Player : public GameElement
     ~Player() {}
     //getters
     sf::Sprite& getSprite() {return this->sprite;}
+    void setSprite(sf::Sprite s) {this->sprite=s;}
     int getScore() {return this->score;}
     void setScore(int s) {this->score=s;}
+    int getW() {return this->w;}
+    int getH() {return this->h;}
     //update position
     void update(int x, int y);
   protected:
