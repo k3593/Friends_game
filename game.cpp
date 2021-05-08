@@ -3,6 +3,7 @@
 #include "player.hpp"
 #include "room.hpp"
 #include "appartment.hpp"
+#include "menu.hpp"
 
 Game::Game()
 {
@@ -44,14 +45,18 @@ void Game::run()
   appart.addRoom(room8);
   appart.addRoom(room9);
 
-  sf::RenderWindow window(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
+  sf::RenderWindow window_menu(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
+  sf::RenderWindow window_game(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
   //icone
   sf::Image icone;
   if(!icone.loadFromFile("icone.png"))
   {
     throw std::runtime_error("impossible de charger image de l'icone");
   }
-  window.setIcon(225, 225,icone.getPixelsPtr());
+  window_menu.setIcon(225, 225,icone.getPixelsPtr());
+  window_game.setIcon(225, 225,icone.getPixelsPtr());
+  //Création du menu
+  Menu menu(window_menu.getSize().x, window_menu.getSize().y);
 
   appart.calculScore(p1);
   appart.calculScore(p2);
@@ -62,22 +67,45 @@ void Game::run()
   float switchFps=100;
   float speedFps=500;
 
-  while (window.isOpen())
+  while (window_menu.isOpen())
   {
       sf::Event event;
-      while (window.pollEvent(event))
+
+      while (window_menu.pollEvent(event))
+      {
+          if (event.type == sf::Event::Resized)
+          {
+            // récupération de la taille de la fenêtre
+            sf::Vector2u size = window_menu.getSize();
+
+            float ratio(windowHeight/windowWidht);
+            size.y=(unsigned int) (ratio*size.x);
+            window_menu.setSize(size);
+          }
+          if (event.type == sf::Event::Closed)
+              window_menu.close();
+      }
+      window_menu.clear();
+      menu.draw(window_menu);
+      window_menu.display();
+  }
+
+  while (window_game.isOpen())
+  {
+      sf::Event event;
+      while (window_game.pollEvent(event))
       {
           if (event.type == sf::Event::Resized)
           {
               // récupération de la taille de la fenêtre
-              sf::Vector2u size = window.getSize();
+              sf::Vector2u size = window_game.getSize();
 
               float ratio(windowHeight/windowWidht);
               size.y=(unsigned int) (ratio*size.x);
-              window.setSize(size);
+              window_game.setSize(size);
           }
           if (event.type == sf::Event::Closed)
-              window.close();
+              window_game.close();
       }
 
     sf::Vector2f posMonica = p1.getSprite().getPosition();
@@ -155,27 +183,26 @@ void Game::run()
           p2.setSprite(s2);
       }
 
-
       p1.getSprite().setPosition(posMonica.x, posMonica.y);
       p1.update(posMonica.x, posMonica.y);
       p2.getSprite().setPosition(posJoey.x, posJoey.y);
       p2.update(posJoey.x, posJoey.y);
-      window.clear();
+      window_game.clear();
       appart.inRoom(p1);
       appart.inRoom(p2);
-      window.draw(appart.getSprite());
-      window.draw(room1.getRectangle());
-      window.draw(room2.getRectangle());
-      window.draw(room3.getRectangle());
-      window.draw(room4.getRectangle());
-      window.draw(room5.getRectangle());
-      window.draw(room6.getRectangle());
-      window.draw(room7.getRectangle());
-      window.draw(room8.getRectangle());
-      window.draw(room9.getRectangle());
-      appart.affichage(window);
-      window.draw(p1.getSprite());
-      window.draw(p2.getSprite());
-      window.display();
+      window_game.draw(appart.getSprite());
+      window_game.draw(room1.getRectangle());
+      window_game.draw(room2.getRectangle());
+      window_game.draw(room3.getRectangle());
+      window_game.draw(room4.getRectangle());
+      window_game.draw(room5.getRectangle());
+      window_game.draw(room6.getRectangle());
+      window_game.draw(room7.getRectangle());
+      window_game.draw(room8.getRectangle());
+      window_game.draw(room9.getRectangle());
+      appart.affichage(window_game);
+      window_game.draw(p1.getSprite());
+      window_game.draw(p2.getSprite());
+      window_game.display();
   }
 }
