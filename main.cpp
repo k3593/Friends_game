@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
     if(!icone.loadFromFile("icone.png"))
     {
       throw std::runtime_error("impossible de charger image de l'icone");
-    }	
+    }
     window.setIcon(225, 225,icone.getPixelsPtr());
 
     appart.calculScore(p1);
@@ -153,7 +153,7 @@ int main(int argc, char ** argv)
             s2.setTextureRect(sf::IntRect(anim2.x*48, anim2.y*48, 48, 48));
             p2.setSprite(s2);
         }
-        
+
 
         p1.getSprite().setPosition(posMonica.x, posMonica.y);
         p1.update(posMonica.x, posMonica.y);
@@ -172,15 +172,7 @@ int main(int argc, char ** argv)
         window.draw(room7.getRectangle());
         window.draw(room8.getRectangle());
         window.draw(room9.getRectangle());
-        room1.affichage(window);
-        room2.affichage(window);
-        room3.affichage(window);
-        room4.affichage(window);
-        room5.affichage(window);
-        room6.affichage(window);
-        room7.affichage(window);
-        room8.affichage(window);
-        room9.affichage(window);
+        appart.affichage(window);
         window.draw(p1.getSprite());
         window.draw(p2.getSprite());
         window.display();

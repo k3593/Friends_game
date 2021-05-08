@@ -105,3 +105,10 @@ Room& Appartment::inRoom(Player player){
     }
   }
 }
+
+void Appartment::affichage(sf::RenderWindow& window){
+  for (int i=0; i<this->rooms.size(); i=i+1)
+  {
+      rooms[i].affichage(window);
+  }
+}

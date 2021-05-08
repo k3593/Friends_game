@@ -15,7 +15,7 @@ using namespace std;
 
 
 
-class Appartment : public GameElement 
+class Appartment : public GameElement
 {
   public:
     //constructeurs
@@ -29,6 +29,8 @@ class Appartment : public GameElement
     sf::Sprite& getSprite() {return this->sprite;}
     //Verifier dans quelle pièce le joueur est.
     Room& inRoom(Player player);
+    //affichage appartement
+    void affichage(sf::RenderWindow& window);
   protected:
     sf::Texture texture;
     sf::Sprite sprite;
