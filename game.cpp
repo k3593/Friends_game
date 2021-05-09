@@ -1,29 +1,10 @@
 #include "game.hpp"
 #include "gameElement.hpp"
-#include "player.hpp"
-#include "room.hpp"
 #include "appartment.hpp"
 #include "menu.hpp"
 
 Game::Game()
 {
-
-}
-
-void Game::run()
-{
-  float windowHeight = 721;
-  float windowWidht = 1109;
-  //pour l'animation lors des deplacements
-  enum Dir{Down, Left, Right, Up};
-  sf::Vector2i anim1(1,Down);
-  sf::Vector2i anim2(1,Down);
-  bool updateFPS = true;
-  //Création des joueurs
-  Player p1(0, 0, 144, 192, "monica", "monica.png");
-  Player p2(0, 0, 144, 192, "joey", "joey.png");
-  //Création de l'appartement
-  Appartment appart(10, 10, 10, 10, "appart", "apartment.png");
   //Création des pièces de l'appartement
   Room room1(10, 10, 120, 370, 120, 120, "Bedroom_chandler");
   Room room2(10, 10, 120, 500, 130, 130, "Bedroom_joey");
@@ -45,27 +26,20 @@ void Game::run()
   appart.addRoom(room8);
   appart.addRoom(room9);
 
-  sf::RenderWindow window_menu(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
-  sf::RenderWindow window_game(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
-  //icone
-  sf::Image icone;
   if(!icone.loadFromFile("icone.png"))
   {
     throw std::runtime_error("impossible de charger image de l'icone");
   }
+
+}
+
+void Game::menu()
+{
+  sf::RenderWindow window_menu(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
+
   window_menu.setIcon(225, 225,icone.getPixelsPtr());
-  window_game.setIcon(225, 225,icone.getPixelsPtr());
   //Création du menu
   Menu menu(window_menu.getSize().x, window_menu.getSize().y);
-
-  appart.calculScore(p1);
-  appart.calculScore(p2);
-
-  //création d'une horloge
-  sf::Clock time;
-  float countFps=0;
-  float switchFps=100;
-  float speedFps=500;
 
   while (window_menu.isOpen())
   {
@@ -89,6 +63,7 @@ void Game::run()
                   {
                     case 0:
                       std::cout << "bouton play" << std::endl;
+                      this->play();
                       break;
                     case 1:
                       std::cout << "bouton options" << std::endl;
@@ -108,6 +83,35 @@ void Game::run()
       menu.draw(window_menu);
       window_menu.display();
   }
+}
+
+void Game::play()
+{
+  //Création des joueurs
+  Player p1(0, 0, 144, 192, "monica", "monica.png");
+  Player p2(0, 0, 144, 192, "joey", "joey.png");
+  appart.addPlayer(p1);
+  appart.addPlayer(p2);
+
+  appart.calculScore(appart.getPlayer(0));
+  appart.calculScore(appart.getPlayer(1));
+
+  p1 = appart.getPlayer(0);
+  p2 = appart.getPlayer(1);
+  sf::RenderWindow window_game(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
+  window_game.setIcon(225, 225,icone.getPixelsPtr());
+
+  //pour l'animation lors des deplacements
+  enum Dir{Down, Left, Right, Up};
+  sf::Vector2i anim1(1,Down);
+  sf::Vector2i anim2(1,Down);
+  bool updateFPS = true;
+
+  //création d'une horloge
+  sf::Clock time;
+  float countFps=0;
+  float switchFps=100;
+  float speedFps=500;
 
   while (window_game.isOpen())
   {
@@ -210,15 +214,6 @@ void Game::run()
       appart.inRoom(p1);
       appart.inRoom(p2);
       window_game.draw(appart.getSprite());
-      window_game.draw(room1.getRectangle());
-      window_game.draw(room2.getRectangle());
-      window_game.draw(room3.getRectangle());
-      window_game.draw(room4.getRectangle());
-      window_game.draw(room5.getRectangle());
-      window_game.draw(room6.getRectangle());
-      window_game.draw(room7.getRectangle());
-      window_game.draw(room8.getRectangle());
-      window_game.draw(room9.getRectangle());
       appart.affichage(window_game);
       window_game.draw(p1.getSprite());
       window_game.draw(p2.getSprite());

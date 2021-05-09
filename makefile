@@ -15,7 +15,7 @@ room.o : room.cpp room.hpp gameElement.hpp
 appartment.o : appartment.cpp appartment.hpp gameElement.hpp room.hpp player.hpp
 	g++ -Wall -c appartment.cpp
 
-game.o : game.cpp game.hpp
+game.o : game.cpp game.hpp appartment.hpp
 	g++ -Wall -c game.cpp
 
 menu.o : menu.cpp menu.hpp
