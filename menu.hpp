@@ -13,6 +13,7 @@ public:
   void draw(sf::RenderWindow &window);
   void goUp();
   void goDown();
+  int GetState() {return index;}
 
 private:
   int index;

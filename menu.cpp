@@ -20,6 +20,8 @@ Menu::Menu(float width, float height)
   text[2].setColor(sf::Color::White);
   text[2].setString("Exit");
   text[2].setPosition(sf::Vector2f(width/2, height/4*3));
+
+  index = 0;
 }
 
 void Menu::draw(sf::RenderWindow &window)
@@ -27,5 +29,25 @@ void Menu::draw(sf::RenderWindow &window)
   for(int i=0; i<3; i++)
   {
     window.draw(text[i]);
+  }
+}
+
+void Menu::goUp()
+{
+  if(index - 1 >=0)
+  {
+    text[index].setColor(sf::Color::White);
+    index = index-1;
+    text[index].setColor(sf::Color::Red);
+  }
+}
+
+void Menu::goDown()
+{
+  if(index + 1 < 3)
+  {
+    text[index].setColor(sf::Color::White);
+    index = index+1;
+    text[index].setColor(sf::Color::Red);
   }
 }

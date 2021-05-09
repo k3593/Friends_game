@@ -73,17 +73,36 @@ void Game::run()
 
       while (window_menu.pollEvent(event))
       {
-          if (event.type == sf::Event::Resized)
+          switch(event.type)
           {
-            // récupération de la taille de la fenêtre
-            sf::Vector2u size = window_menu.getSize();
-
-            float ratio(windowHeight/windowWidht);
-            size.y=(unsigned int) (ratio*size.x);
-            window_menu.setSize(size);
-          }
-          if (event.type == sf::Event::Closed)
+            case sf::Event::KeyReleased:
+              switch(event.key.code)
+              {
+                case sf::Keyboard::Up:
+                  menu.goUp();
+                  break;
+                case sf::Keyboard::Down:
+                  menu.goDown();
+                  break;
+                case sf::Keyboard::Return:
+                  switch (menu.GetState())
+                  {
+                    case 0:
+                      std::cout << "bouton play" << std::endl;
+                      break;
+                    case 1:
+                      std::cout << "bouton options" << std::endl;
+                      break;
+                    case 2:
+                      std::cout << "bouton exit" << std::endl;
+                      break;
+                  }
+              }
+              break;
+            case sf::Event::Closed:
               window_menu.close();
+              break;
+          }
       }
       window_menu.clear();
       menu.draw(window_menu);
