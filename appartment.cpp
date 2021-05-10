@@ -46,14 +46,14 @@ void Appartment::addPlayer(Player nom){
   cout << "Ajout du joueur terminé" << endl;
 }
 
-void Appartment::calculScore(Player nom)
+void Appartment::calculScore(Player& nom)
 {
   int i,j,k;
   nom.setScore(0);
   //cout << "score de " << nom.getName()<< " : " << nom.getScore() << endl;
   for(i=0;i<this->rooms.size();i++)
   {
-
+    
     for(j=0;j<this->rooms[i].getC();j++)
       for(k=0;k<this->rooms[i].getL();k++)
       {

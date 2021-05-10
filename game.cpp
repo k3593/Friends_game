@@ -112,7 +112,8 @@ void Game::initText()
 void Game::updateText()
 {
   std::stringstream ss;
-  ss <<"Points de Monica : "<<  appart.getPlayer(0).getScore() <<"\n" << "Points de Joey : "<< appart.getPlayer(0).getScore() ;
+  ss <<"Points de Monica : "<<  appart.getPlayer(0).getScore() <<"\n" << "Points de Joey : "<< appart.getPlayer(1).getScore() ;
+  cout << ss.str() <<endl;
   this->text.setString(ss.str());
 }
 
@@ -127,8 +128,9 @@ void Game::play()
   appart.calculScore(appart.getPlayer(0));
   appart.calculScore(appart.getPlayer(1));
 
-  p1 = appart.getPlayer(0);
-  p2 = appart.getPlayer(1);
+  appart.calculScore(p1);
+  appart.calculScore(p2);
+
   sf::RenderWindow window_game(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
   window_game.setIcon(225, 225,icone.getPixelsPtr());
 
@@ -261,13 +263,16 @@ void Game::play()
     //calcul du score
     for(int i=0; i<2; i++)
       appart.calculScore(appart.getPlayer(i));
-    updateText();
+    /*appart.calculScore(appart.getPlayer(0));
+    appart.calculScore(appart.getPlayer(1));
     
-    window_game.draw(text);
+    cout <<"Points de Monica : "<<  appart.getPlayer(0).getScore()  << "Points de Joey : "<< appart.getPlayer(0).getScore()<<endl ;*/
+    
+    
 
    
     
-
+    updateText();
     p1.getSprite().setPosition(posMonica.x, posMonica.y);
     p1.update(posMonica.x, posMonica.y);
     p2.getSprite().setPosition(posJoey.x, posJoey.y);
@@ -279,7 +284,7 @@ void Game::play()
     appart.affichage(window_game);
     window_game.draw(p1.getSprite());
     window_game.draw(p2.getSprite());
-    
+    window_game.draw(text);
     window_game.display();
   }
 }
