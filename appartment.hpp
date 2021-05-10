@@ -15,11 +15,12 @@ using namespace std;
 
 
 
-class Appartment : public GameElement 
+class Appartment : public GameElement
 {
   public:
     //constructeurs
     Appartment(int x, int y, int w, int h, string nom, string fileName);
+    Appartment();
     // destructeur
     ~Appartment() {}
     void addRoom(Room nom);
@@ -27,8 +28,11 @@ class Appartment : public GameElement
     void calculScore(Player nom);
     //getters
     sf::Sprite& getSprite() {return this->sprite;}
+    Player getPlayer (int i) {return players[i];}
     //Verifier dans quelle pièce le joueur est.
     Room& inRoom(Player player);
+    //affichage appartement
+    void affichage(sf::RenderWindow& window);
   protected:
     sf::Texture texture;
     sf::Sprite sprite;

@@ -49,10 +49,11 @@ void Appartment::addPlayer(Player nom){
 void Appartment::calculScore(Player nom)
 {
   int i,j,k;
-  cout << "score de " << nom.getName()<< " : " << nom.getScore() << endl;
+  nom.setScore(0);
+  //cout << "score de " << nom.getName()<< " : " << nom.getScore() << endl;
   for(i=0;i<this->rooms.size();i++)
   {
-    
+
     for(j=0;j<this->rooms[i].getC();j++)
       for(k=0;k<this->rooms[i].getL();k++)
       {
@@ -64,9 +65,9 @@ void Appartment::calculScore(Player nom)
         {
           nom.setScore(nom.getScore()+1);
         }
-        
+
       }
-    cout << "score de " << nom.getName()<<" dans " << rooms[i].getName()<< " : " << nom.getScore() << endl;
+    //cout << "score de " << nom.getName()<<" dans " << rooms[i].getName()<< " : " << nom.getScore() << endl;
   }
   cout << "score de " << nom.getName()<< " : " << nom.getScore() << endl;
 }
@@ -83,14 +84,12 @@ Room& Appartment::inRoom(Player player){
       int posYRoom = rooms[i].getY();
       int posLocalPlayerX = (posXPlayer - posXRoom) + player.getW()/2;
       int posLocalPlayerY = (posYPlayer - posYRoom) + player.getH()/2;
-      cout << "x="<< player.getW() << endl;
-      cout << "y="<< player.getH() << endl;
 
       for (int k=0; k<rooms[i].getC(); k++)
       {
         for (int j=0; j<rooms[i].getL(); j++)
         {
-          if(k*(rooms[i].getW()/rooms[i].getC())<posLocalPlayerX && posLocalPlayerX<(k+1)*(rooms[i].getW()/rooms[i].getC()) && j*(rooms[i].getH()/rooms[i].getL())<posLocalPlayerY && posLocalPlayerY<(j+1)*(rooms[i].getH()/rooms[i].getL()))
+          if(k*(rooms[i].getW()/rooms[i].getC())<=posLocalPlayerX && posLocalPlayerX<=(k+1)*(rooms[i].getW()/rooms[i].getC()) && j*(rooms[i].getH()/rooms[i].getL())<=posLocalPlayerY && posLocalPlayerY<=(j+1)*(rooms[i].getH()/rooms[i].getL()))
           {
             if(player.getName().compare("joey") == 0){
               rooms[i](k,j).setOutlineColor(sf::Color::Transparent);
@@ -108,7 +107,9 @@ Room& Appartment::inRoom(Player player){
   }
 }
 
-
-
-
-
+void Appartment::affichage(sf::RenderWindow& window){
+  for (int i=0; i<this->rooms.size(); i=i+1)
+  {
+      rooms[i].affichage(window);
+  }
+}
