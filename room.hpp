@@ -11,11 +11,12 @@
 using namespace std;
 
 
-class Room : public GameElement 
+class Room : public GameElement
 {
   public:
     //constructeurs
     Room(int l, int c, int x, int y, int w, int h, string nom);
+    Room();
     // destructeur
     ~Room();
     //Vérification de l'état d'une pièce

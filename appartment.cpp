@@ -73,12 +73,13 @@ void Appartment::calculScore(Player& nom)
 }
 
 //Cette fonction return l'adresse de la pièce dans laquelle le joueur se trouve.
-void Appartment::inRoom(Player player){
+void Appartment::inRoom(Player& player){
   cout << rooms.size() << endl;
   for(int i=0; i<rooms.size(); i++){
     if((rooms[i].getX()<player.getX() && player.getX()<rooms[i].getX()+rooms[i].getW()) && rooms[i].getY()<player.getY() && player.getY()<rooms[i].getY()+rooms[i].getH())
     {
-      player.setRoom(rooms[i].getName());
+      //On set la room dans laquelle se trouve le joueur
+      player.setRoom(rooms[i]);
       int posXPlayer = player.getX();
       int posYPlayer = player.getY();
       int posXRoom = rooms[i].getX();

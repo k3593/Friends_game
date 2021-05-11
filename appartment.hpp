@@ -29,8 +29,9 @@ class Appartment : public GameElement
     //getters
     sf::Sprite& getSprite() {return this->sprite;}
     Player& getPlayer (int i) {return players[i];}
+    Room& getRoom(int index) {return this->rooms[index];}
     //Verifier dans quelle pièce le joueur est.
-    void inRoom(Player player);
+    void inRoom(Player& player);
     //affichage appartement
     void affichage(sf::RenderWindow& window);
   protected:

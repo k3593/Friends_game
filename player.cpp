@@ -11,7 +11,7 @@
 using namespace std;
 
 //Constructeur Player
-Player::Player(int x, int y, int w, int h, string nom, string filename)
+Player::Player(int x, int y, int w, int h, string nom, string filename, Room& room_init)
 {
     cout << "Initialisation du joueur" << endl;
     this->x = x;
@@ -19,6 +19,7 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
     this->w = w;
     this->h = h;
     this->nom = nom;
+    this->room = room_init;
     //Generation du sprite
     sf::Texture texture;
     if(!texture.loadFromFile(filename))
@@ -38,6 +39,7 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
 }
 
 void Player::update(int x, int y){
+    cout << room.getName() << endl;
     if(x<120)
       x = 120;
     else if(y<370)

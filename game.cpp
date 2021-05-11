@@ -120,8 +120,8 @@ void Game::updateText()
 void Game::play()
 {
   //Création des joueurs
-  Player p1(140, 370, 144, 192, "monica", "monica.png");
-  Player p2(140, 370, 144, 192, "joey", "joey.png");
+  Player p1(140, 370, 144, 192, "monica", "monica.png", appart.getRoom(1));
+  Player p2(140, 370, 144, 192, "joey", "joey.png", appart.getRoom(1));
   appart.addPlayer(p1);
   appart.addPlayer(p2);
 
