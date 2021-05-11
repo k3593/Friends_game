@@ -1,8 +1,9 @@
 #include "player.hpp"
 #include "gameElement.hpp"
+#include "room.hpp"
 
 #include <iostream>
-#include <string>
+#include<cstring>
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
@@ -26,9 +27,9 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
         }
     this->texture = texture;
     sf::Sprite sprite;
+    sprite.setPosition(x, y);
     sprite.setTexture(this->texture);
     sf::Vector2f scale = sprite.getScale();
-    //sprite.scale(scale.x * 1, scale.y * 1);
     scale = sprite.getScale();
     this->w = 48;
     this->h = 48;
@@ -37,9 +38,22 @@ Player::Player(int x, int y, int w, int h, string nom, string filename)
 }
 
 void Player::update(int x, int y){
+    if(x<120)
+      x = 120;
+    else if(y<370)
+      y = 370;
+    else if(x>240)
+      x = 240;
+    else if(y>490)
+      y = 490;
   this->x = x;
   this->y = y;
+  sprite.setPosition(x, y);
+
+  //this->room = room_name;
+  //cout << this->room << endl;
 }
+
 //destructeur de player
 //Player:: ~Player(){
 //	delete this->sprite;

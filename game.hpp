@@ -21,7 +21,7 @@ class Game
   private:
     float windowHeight = 721;
     float windowWidht = 1109;
-    Appartment appart{10, 10, 10, 10, "appart", "apartment.png"};
+    Appartment appart{10, 10, 10, 10, "appart", "apartment.jpeg"};
     sf::Image icone;
     sf::Text text;
     sf::Font MyFont;

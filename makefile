@@ -6,7 +6,7 @@ main : main.o gameElement.o player.o room.o appartment.o game.o menu.o
 gameElement.o : gameElement.cpp gameElement.hpp
 	g++ -Wall -c gameElement.cpp
 
-player.o : player.cpp player.hpp gameElement.hpp
+player.o : player.cpp player.hpp gameElement.hpp room.hpp
 	g++ -Wall -c player.cpp
 
 room.o : room.cpp room.hpp gameElement.hpp

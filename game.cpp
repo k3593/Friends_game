@@ -88,17 +88,17 @@ void Game::menu()
       window_menu.clear();
       menu.draw(window_menu);
       window_menu.display();
-      
+
   }
 }
 
 void Game::initFonts()
 {
   // Chargement de la police à partir d'un fichier
-    
+
     if (!MyFont.loadFromFile("Dosis-Light.ttf"))
     {
-      throw std::runtime_error("impossible de charger la police"); 
+      throw std::runtime_error("impossible de charger la police");
     }
 }
 void Game::initText()
@@ -113,15 +113,15 @@ void Game::updateText()
 {
   std::stringstream ss;
   ss <<"Points de Monica : "<<  appart.getPlayer(0).getScore() <<"\n" << "Points de Joey : "<< appart.getPlayer(1).getScore() ;
-  cout << ss.str() <<endl;
+  //cout << ss.str() <<endl;
   this->text.setString(ss.str());
 }
 
 void Game::play()
 {
   //Création des joueurs
-  Player p1(0, 0, 144, 192, "monica", "monica.png");
-  Player p2(0, 0, 144, 192, "joey", "joey.png");
+  Player p1(140, 370, 144, 192, "monica", "monica.png");
+  Player p2(140, 370, 144, 192, "joey", "joey.png");
   appart.addPlayer(p1);
   appart.addPlayer(p2);
 
@@ -144,7 +144,7 @@ void Game::play()
   //création d'une horloge
   sf::Clock time1;
   sf::Clock time2;
-  
+
 
   while (window_game.isOpen())
   {
@@ -163,14 +163,14 @@ void Game::play()
           if (event.type == sf::Event::Closed)//si on clique sur fermer
               window_game.close();
 
-          if(event.type=sf::Event::KeyPressed)//si une touche est pressée 
+          if(event.type=sf::Event::KeyPressed)//si une touche est pressée
           {
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)
             ||sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
               updateFPS1=true;//on fait l'animation
             else
               updateFPS1=false;//sinon on ne l'a fait pas
-            
+
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)
             ||sf::Keyboard::isKeyPressed(sf::Keyboard::D) ||sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
               updateFPS2=true;//on fait l'animation
@@ -249,7 +249,7 @@ void Game::play()
       {
         anim2.x++;
         if(anim2.x*48 >= p2.getW()*3)
-            anim2.x=0;    
+            anim2.x=0;
         time2.restart();
       }
     }
@@ -263,23 +263,14 @@ void Game::play()
     //calcul du score
     for(int i=0; i<2; i++)
       appart.calculScore(appart.getPlayer(i));
-    /*appart.calculScore(appart.getPlayer(0));
-    appart.calculScore(appart.getPlayer(1));
-    
-    cout <<"Points de Monica : "<<  appart.getPlayer(0).getScore()  << "Points de Joey : "<< appart.getPlayer(0).getScore()<<endl ;*/
-    
-    
 
-   
-    
     updateText();
-    p1.getSprite().setPosition(posMonica.x, posMonica.y);
-    p1.update(posMonica.x, posMonica.y);
-    p2.getSprite().setPosition(posJoey.x, posJoey.y);
-    p2.update(posJoey.x, posJoey.y);
     window_game.clear();
     appart.inRoom(p1);
     appart.inRoom(p2);
+    p1.update(posMonica.x, posMonica.y);
+    p2.update(posJoey.x, posJoey.y);
+
     window_game.draw(appart.getSprite());
     appart.affichage(window_game);
     window_game.draw(p1.getSprite());

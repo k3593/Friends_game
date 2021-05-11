@@ -7,10 +7,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "gameElement.hpp"
+#include "room.hpp"
 
 using namespace std;
 
-class Player : public GameElement 
+class Player : public GameElement
 {
   public:
     //constructeurs
@@ -22,6 +23,7 @@ class Player : public GameElement
     void setSprite(sf::Sprite s) {this->sprite=s;}
     int getScore() {return this->score;}
     void setScore(int s) {this->score=s;}
+    void setRoom(string room_name) {this->room = room_name;}
     int getW() {return this->w;}
     int getH() {return this->h;}
     //update position
@@ -30,6 +32,7 @@ class Player : public GameElement
     int score;
     sf::Texture texture;
     sf::Sprite sprite;
+    string room;
 };
 
 #endif

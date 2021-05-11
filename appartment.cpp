@@ -36,12 +36,12 @@ Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
   cout << "Fin de l'initialisation d'un appartement" << endl;
 }
 
-void Appartment::addRoom(Room nom){
+void Appartment::addRoom(Room& nom){
   this->rooms.push_back(nom);
   cout << "Ajout de la pièce terminé" << endl;
 }
 
-void Appartment::addPlayer(Player nom){
+void Appartment::addPlayer(Player& nom){
   this->players.push_back(nom);
   cout << "Ajout du joueur terminé" << endl;
 }
@@ -53,7 +53,7 @@ void Appartment::calculScore(Player& nom)
   //cout << "score de " << nom.getName()<< " : " << nom.getScore() << endl;
   for(i=0;i<this->rooms.size();i++)
   {
-    
+
     for(j=0;j<this->rooms[i].getC();j++)
       for(k=0;k<this->rooms[i].getL();k++)
       {
@@ -69,15 +69,16 @@ void Appartment::calculScore(Player& nom)
       }
     //cout << "score de " << nom.getName()<<" dans " << rooms[i].getName()<< " : " << nom.getScore() << endl;
   }
-  cout << "score de " << nom.getName()<< " : " << nom.getScore() << endl;
+  //cout << "score de " << nom.getName()<< " : " << nom.getScore() << endl;
 }
 
 //Cette fonction return l'adresse de la pièce dans laquelle le joueur se trouve.
-Room& Appartment::inRoom(Player player){
+void Appartment::inRoom(Player player){
+  cout << rooms.size() << endl;
   for(int i=0; i<rooms.size(); i++){
     if((rooms[i].getX()<player.getX() && player.getX()<rooms[i].getX()+rooms[i].getW()) && rooms[i].getY()<player.getY() && player.getY()<rooms[i].getY()+rooms[i].getH())
     {
-      //cout << rooms[i].getName() << endl;
+      player.setRoom(rooms[i].getName());
       int posXPlayer = player.getX();
       int posYPlayer = player.getY();
       int posXRoom = rooms[i].getX();
@@ -102,7 +103,6 @@ Room& Appartment::inRoom(Player player){
           }
         }
       }
-      return(rooms[i]);
     }
   }
 }
