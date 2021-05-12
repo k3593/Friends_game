@@ -74,9 +74,8 @@ void Appartment::calculScore(Player& nom)
 
 //Cette fonction return l'adresse de la pièce dans laquelle le joueur se trouve.
 void Appartment::inRoom(Player& player){
-  cout << rooms.size() << endl;
   for(int i=0; i<rooms.size(); i++){
-    if((rooms[i].getX()<player.getX() && player.getX()<rooms[i].getX()+rooms[i].getW()) && rooms[i].getY()<player.getY() && player.getY()<rooms[i].getY()+rooms[i].getH())
+    if((rooms[i].getX()<player.getX()+ player.getW()/2 && player.getX()+ player.getW()/2<rooms[i].getX()+rooms[i].getW()) && rooms[i].getY()<player.getY()+ player.getH()/2 && player.getY()+ player.getH()/2<rooms[i].getY()+rooms[i].getH())
     {
       //On set la room dans laquelle se trouve le joueur
       player.setRoom(rooms[i]);
@@ -84,15 +83,17 @@ void Appartment::inRoom(Player& player){
       int posYPlayer = player.getY();
       int posXRoom = rooms[i].getX();
       int posYRoom = rooms[i].getY();
-      int posLocalPlayerX = (posXPlayer - posXRoom) + player.getW()/2;
-      int posLocalPlayerY = (posYPlayer - posYRoom) + player.getH()/2;
+      int posLocalPlayerX = (posXPlayer - posXRoom) + player.getW()/2 ;
+      int posLocalPlayerY = (posYPlayer - posYRoom) + player.getH()/2 ;
 
+      cout << posLocalPlayerX << endl;
       for (int k=0; k<rooms[i].getC(); k++)
       {
         for (int j=0; j<rooms[i].getL(); j++)
         {
           if(k*(rooms[i].getW()/rooms[i].getC())<=posLocalPlayerX && posLocalPlayerX<=(k+1)*(rooms[i].getW()/rooms[i].getC()) && j*(rooms[i].getH()/rooms[i].getL())<=posLocalPlayerY && posLocalPlayerY<=(j+1)*(rooms[i].getH()/rooms[i].getL()))
           {
+            cout << "hello" << endl;
             if(player.getName().compare("joey") == 0){
               rooms[i](k,j).setOutlineColor(sf::Color::Transparent);
               rooms[i](k,j).setFillColor(sf::Color(105, 105, 105, 192));

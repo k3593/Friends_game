@@ -15,8 +15,7 @@ class Player : public GameElement
 {
   public:
     //constructeurs
-    Player(int x, int y, int w, int h, string nom, string filename, Room& room_init);
-    Player();
+    Player(int x, int y, int w, int h, string nom, string filename, Room room_init);
     // destructeur
     ~Player() {}
     //getters
@@ -24,7 +23,7 @@ class Player : public GameElement
     void setSprite(sf::Sprite s) {this->sprite=s;}
     int getScore() {return this->score;}
     void setScore(int s) {this->score=s;}
-    void setRoom(Room& room_name) {this->room = room_name;}
+    void setRoom(Room room_name) {this->room = room_name;}
     int getW() {return this->w;}
     int getH() {return this->h;}
     //update position
@@ -33,7 +32,7 @@ class Player : public GameElement
     int score;
     sf::Texture texture;
     sf::Sprite sprite;
-    Room& room;
+    Room room{10, 10, 120, 370, 120, 120, "Bedroom_chandler"};
 };
 
 #endif

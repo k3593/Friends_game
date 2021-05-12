@@ -47,7 +47,7 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
     {
       sf::RectangleShape rectangle;
       rectangle.setSize(sf::Vector2f(int(w/c), int(h/l)));
-      rectangle.setOutlineColor(sf::Color::Transparent);
+      rectangle.setOutlineColor(sf::Color::Red);
       rectangle.setOutlineThickness(1);
       rectangle.setPosition(x+i*(w/c), y+j*(h/l));
       rectangle.setFillColor(sf::Color::Transparent);
@@ -71,7 +71,7 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   {
     int nl=rand()%l;
     int nc=rand()%c;
-    if ((cpt<=(nb-1)))//si il y a plus de blanc que de rouge 
+    if ((cpt<=(nb-1)))//si il y a plus de blanc que de rouge
     {
       if (data[nl][nc].getFillColor()==sf::Color::Transparent)
       {
@@ -105,8 +105,6 @@ void Room::affichage(sf::RenderWindow& window){
   }
 }
 
-//destructeur de Room
-Room:: ~Room(){}
 
 /*
 Room:: ~Room(){

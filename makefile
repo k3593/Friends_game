@@ -1,16 +1,16 @@
 all : main
 
 main : main.o gameElement.o player.o room.o appartment.o game.o menu.o
-	g++ -Wall -o main main.o gameElement.o player.o room.o appartment.o game.o menu.o -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -Wall -o main main.o gameElement.o room.o player.o appartment.o game.o menu.o -lsfml-graphics -lsfml-window -lsfml-system
 
 gameElement.o : gameElement.cpp gameElement.hpp
 	g++ -Wall -c gameElement.cpp
 
-player.o : player.cpp player.hpp gameElement.hpp room.hpp
-	g++ -Wall -c player.cpp
-
 room.o : room.cpp room.hpp gameElement.hpp
 	g++ -Wall -c room.cpp
+
+player.o : player.cpp player.hpp gameElement.hpp room.hpp
+	g++ -Wall -c player.cpp
 
 appartment.o : appartment.cpp appartment.hpp gameElement.hpp room.hpp player.hpp
 	g++ -Wall -c appartment.cpp

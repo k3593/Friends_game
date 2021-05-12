@@ -9,15 +9,15 @@
 Game::Game()
 {
   //Création des pièces de l'appartement
-  Room room1(10, 10, 120, 370, 120, 120, "Bedroom_chandler");
-  Room room2(10, 10, 120, 500, 130, 130, "Bedroom_joey");
-  Room room3(10, 10, 280, 400, 180, 130, "Living");
-  Room room4(10, 10, 850, 250, 110, 110, "Bedroom_Monica");
-  Room room5(5, 5, 610, 220, 70, 80, "Bathroom_Monica");
-  Room room6(8, 8, 610, 350, 200, 130, "Living_Monica");
-  Room room7(6, 6, 690, 260, 120, 80, "Living_Monica_2");
-  Room room8(6, 6, 850, 400, 110, 100, "Guest_room");
-  Room room9(6, 6, 360, 220, 70, 80, "Bathroom_Joey");
+  Room room1(10, 10, 90, 350, 120, 120, "Bedroom_chandler");
+  Room room2(10, 10, 90, 500, 130, 130, "Bedroom_joey");
+  Room room3(10, 10, 240, 380, 180, 130, "Living");
+  Room room4(10, 10, 920, 200, 110, 110, "Bedroom_Monica");
+  Room room5(5, 5, 640, 180, 60, 70, "Bathroom_Monica");
+  Room room6(8, 8, 650, 300, 200, 130, "Living_Monica");
+  Room room7(6, 6, 750, 200, 120, 80, "Living_Monica_2");
+  Room room8(6, 6, 920, 350, 110, 100, "Guest_room");
+  Room room9(6, 6, 360, 205, 80, 60, "Bathroom_Joey");
   //Remplissage de l'appartement avec les pièces
   appart.addRoom(room1);
   appart.addRoom(room2);

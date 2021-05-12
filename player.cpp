@@ -1,6 +1,4 @@
 #include "player.hpp"
-#include "gameElement.hpp"
-#include "room.hpp"
 
 #include <iostream>
 #include<cstring>
@@ -11,7 +9,7 @@
 using namespace std;
 
 //Constructeur Player
-Player::Player(int x, int y, int w, int h, string nom, string filename, Room& room_init)
+Player::Player(int x, int y, int w, int h, string nom, string filename, Room room_init)
 {
     cout << "Initialisation du joueur" << endl;
     this->x = x;
@@ -40,17 +38,31 @@ Player::Player(int x, int y, int w, int h, string nom, string filename, Room& ro
 
 void Player::update(int x, int y){
     cout << room.getName() << endl;
-    if(x<120)
-      x = 120;
-    else if(y<370)
-      y = 370;
-    else if(x>240)
-      x = 240;
-    else if(y>490)
-      y = 490;
+    if(x>(room.getX()+room.getW()-24) && y<(room.getY()+(10) + 10-24) && y>(room.getY()+(10) - 10-24)){
+      x = x;
+      y = y;
+    }
+    else if(x<(room.getX()-24) && y<(room.getY()+(10) + 10-24) && y>(room.getY()+(10) - 10-24))
+    {
+      x = x;
+      y = y;
+    }
+    else{
+      if(x<room.getX()-24)
+        x = room.getX()-24;
+      else if(y<room.getY()-24)
+        y = room.getY()-24;
+      else if(x>(room.getX()+room.getW()-24))
+        x = room.getX()+room.getW()-24;
+      else if(y>(room.getY() + room.getH()-24))
+        y = room.getY() + room.getH()-24;
+    }
+
   this->x = x;
   this->y = y;
   sprite.setPosition(x, y);
+  //cout << x << y << endl;
+  cout << room.getX() << room.getY() << endl;
 
   //this->room = room_name;
   //cout << this->room << endl;
