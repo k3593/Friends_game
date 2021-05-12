@@ -15,9 +15,9 @@ class Room : public GameElement
 {
   public:
     //constructeurs
-    Room(int l, int c, int x, int y, int w, int h, string nom);
+    Room(int l, int c, int x, int y, int w, int h, string nom, int d_x, int d_y);
     Room();
-    
+
     //Vérification de l'état d'une pièce
     void affichage(sf::RenderWindow& window);
     //getters
@@ -26,6 +26,9 @@ class Room : public GameElement
     string getName() {return this->nom;}
     sf::Color getDataColor (const int i, const int j) {return data[i][j].getFillColor();}
     sf::RectangleShape& getRectangle() {return this->rectangle;}
+    sf::RectangleShape& getDoor() {return this->door;}
+    int getDoorX() {return this->d_x;}
+    int getDoorY() {return this->d_y;}
     sf::RectangleShape& operator() (int i, int j){
       if(i > this->c || j > this->l){
         throw std::out_of_range("ERREUR : Vous essayez d'acceder à un élément en dehors de la matrice !");
@@ -38,7 +41,11 @@ class Room : public GameElement
   protected:
     int l; //nombre de lignes
     int c; //nombre de colonnes
+    int d_x; //coordonnée x de la porte
+    int d_y; //coordonnée y de la porte
     sf::RectangleShape **data;
     sf::RectangleShape rectangle;
+    sf::RectangleShape door;
+
 };
 #endif

@@ -38,7 +38,7 @@ Player::Player(int x, int y, int w, int h, string nom, string filename, Room roo
 
 void Player::update(int x, int y){
     cout << room.getName() << endl;
-    if(x>(room.getX()+room.getW()-24) && y<(room.getY()+(10) + 10-24) && y>(room.getY()+(10) - 10-24)){
+    if(x>(room.getX()+room.getW()-24) && y<(room.getY()+(room.getDoorY()) + 10-24) && y>(room.getY()+(room.getDoorY()) - 10-24)){
       x = x;
       y = y;
     }

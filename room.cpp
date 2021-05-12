@@ -10,7 +10,7 @@
 using namespace std;
 
 //Constructeur Room
-Room::Room(int l, int c, int x, int y, int w, int h, string nom)
+Room::Room(int l, int c, int x, int y, int w, int h, string nom, int d_x, int d_y)
 {
   cout << "Initialisation d'une pièce" << endl;
   this->l = l;
@@ -19,15 +19,29 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   this->y = y;
   this->w = w;
   this->h = h;
+  this->d_x = d_x;
+  this->d_y = d_y;
   this->nom = nom;
 
+  //declaration du contour de la room
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(w, h));
-  rectangle.setOutlineColor(sf::Color::Transparent);
+  rectangle.setOutlineColor(sf::Color::Red);
   rectangle.setOutlineThickness(2);
   rectangle.setPosition(x, y);
   rectangle.setFillColor(sf::Color::Transparent);
   this->rectangle = rectangle;
+
+  //declaration de la ligne de la porte
+  int length = 20;
+  sf::RectangleShape line;
+  line.setSize(sf::Vector2f(length, 2));
+  line.setOutlineColor(sf::Color::Red);
+  line.setOutlineThickness(length/2);
+  line.setPosition(x +d_x-5, y+d_y);
+  line.setFillColor(sf::Color::Transparent);
+  line.rotate(90);
+  this->door = line;
 
   int i,j;
   int cpt=0;//compteur de rouge
@@ -47,7 +61,7 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
     {
       sf::RectangleShape rectangle;
       rectangle.setSize(sf::Vector2f(int(w/c), int(h/l)));
-      rectangle.setOutlineColor(sf::Color::Red);
+      rectangle.setOutlineColor(sf::Color::Transparent);
       rectangle.setOutlineThickness(1);
       rectangle.setPosition(x+i*(w/c), y+j*(h/l));
       rectangle.setFillColor(sf::Color::Transparent);

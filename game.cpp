@@ -9,15 +9,15 @@
 Game::Game()
 {
   //Création des pièces de l'appartement
-  Room room1(10, 10, 90, 350, 120, 120, "Bedroom_chandler");
-  Room room2(10, 10, 90, 500, 130, 130, "Bedroom_joey");
-  Room room3(10, 10, 240, 380, 180, 130, "Living");
-  Room room4(10, 10, 920, 200, 110, 110, "Bedroom_Monica");
-  Room room5(5, 5, 640, 180, 60, 70, "Bathroom_Monica");
-  Room room6(8, 8, 650, 300, 200, 130, "Living_Monica");
-  Room room7(6, 6, 750, 200, 120, 80, "Living_Monica_2");
-  Room room8(6, 6, 920, 350, 110, 100, "Guest_room");
-  Room room9(6, 6, 360, 205, 80, 60, "Bathroom_Joey");
+  Room room1(10, 10, 90, 350, 120, 120, "Bedroom_chandler", 120, 60);
+  Room room2(10, 10, 90, 500, 130, 130, "Bedroom_joey", 130, 65);
+  Room room3(10, 10, 240, 380, 180, 130, "Living", 180, 65);
+  Room room4(10, 10, 920, 200, 110, 110, "Bedroom_Monica", 110, 55);
+  Room room5(5, 5, 640, 180, 60, 70, "Bathroom_Monica", 60, 35);
+  Room room6(8, 8, 650, 300, 200, 130, "Living_Monica", 200, 65);
+  Room room7(6, 6, 750, 200, 120, 80, "Living_Monica_2", 120, 40);
+  Room room8(6, 6, 920, 350, 110, 100, "Guest_room", 110, 50);
+  Room room9(6, 6, 360, 205, 80, 60, "Bathroom_Joey", 80, 30);
   //Remplissage de l'appartement avec les pièces
   appart.addRoom(room1);
   appart.addRoom(room2);
@@ -273,6 +273,16 @@ void Game::play()
 
     window_game.draw(appart.getSprite());
     appart.affichage(window_game);
+    window_game.draw(appart.getRoom(0).getDoor());
+    window_game.draw(appart.getRoom(1).getDoor());
+    window_game.draw(appart.getRoom(2).getDoor());
+    window_game.draw(appart.getRoom(3).getDoor());
+    window_game.draw(appart.getRoom(4).getDoor());
+
+    window_game.draw(appart.getRoom(5).getDoor());
+    window_game.draw(appart.getRoom(6).getDoor());
+    window_game.draw(appart.getRoom(7).getDoor());
+    window_game.draw(appart.getRoom(8).getDoor());
     window_game.draw(p1.getSprite());
     window_game.draw(p2.getSprite());
     window_game.draw(text);

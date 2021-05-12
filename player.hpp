@@ -32,7 +32,7 @@ class Player : public GameElement
     int score;
     sf::Texture texture;
     sf::Sprite sprite;
-    Room room{10, 10, 120, 370, 120, 120, "Bedroom_chandler"};
+    Room room{10, 10, 120, 370, 120, 120, "Bedroom_chandler", 0, 0};
 };
 
 #endif
