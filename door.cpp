@@ -3,8 +3,12 @@
 using namespace std;
 
 //Constructeur Player
-Door::Door(int x, int y, int w, int h, string nom)
+Door::Door(int x, int y, int w, int h, string nom, int ang, int cot)
 {
+  this->x = x;
+  this->y = y;
+  this->angle = ang;
+  this->cote = cot;
   //declaration de la ligne de la porte
   int length = 20;
   sf::RectangleShape line;
@@ -13,6 +17,6 @@ Door::Door(int x, int y, int w, int h, string nom)
   line.setOutlineThickness(length/2);
   line.setPosition(x-5, y);
   line.setFillColor(sf::Color::Transparent);
-  line.rotate(90);
+  line.rotate(angle);
   this->door = line;
 }

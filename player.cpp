@@ -38,34 +38,87 @@ Player::Player(int x, int y, int w, int h, string nom, string filename, Room roo
 
 void Player::update(int x, int y){
     cout << room.getName() << endl;
-    /*
-    if(x>(room.getX()+room.getW()-24) && y<(room.getY()+(room.getDoorY()) + 10-24) && y>(room.getY()+(room.getDoorY()) - 10-24)){
-      x = x;
-      y = y;
-    }
-    else if(x<(room.getX()-24) && y<(room.getY()+(10) + 10-24) && y>(room.getY()+(10) - 10-24))
+
+    for (int i=0; i<room.getDoors().size(); i++)
     {
-      x = x;
-      y = y;
+      int cote = room.getDoors()[i].getCote();
+      cout << cote << endl;
+      if(cote ==2){
+        if(x>(room.getX()+room.getW()-24) && y<((room.getDoors()[i].getY())-24+10) && y>((room.getDoors()[i].getY()) -24-10))
+        {
+          cout << "hello" << endl;
+          x = x;
+          y = y;
+
+        }
+        else{
+          cout << "helloelse" << endl;
+          if(x<room.getX()-24)
+          x = room.getX()-24;
+          else if(y<room.getY()-24)
+          y = room.getY()-24;
+          else if(x>(room.getX()+room.getW()-24))
+          x = room.getX()+room.getW()-24;
+          else if(y>(room.getY() + room.getH()-24))
+          y = room.getY() + room.getH()-24;
+
+        }
+      }
+
+
+      else if(cote ==0){
+        if(x<(room.getX()+24) && y<((room.getDoors()[i].getY())-24+10) && y>((room.getDoors()[i].getY()) -24-10))
+        {
+          cout << "hello2" << endl;
+          x = x;
+          y = y;
+        }
+
+      }
     }
-    */
-      if(x<room.getX()-24)
-        x = room.getX()-24;
-      else if(y<room.getY()-24)
-        y = room.getY()-24;
-      else if(x>(room.getX()+room.getW()-24))
-        x = room.getX()+room.getW()-24;
-      else if(y>(room.getY() + room.getH()-24))
-        y = room.getY() + room.getH()-24;
 
-  this->x = x;
-  this->y = y;
-  sprite.setPosition(x, y);
-  //cout << x << y << endl;
-  cout << room.getX() << room.getY() << endl;
+      /*
+      else if(cote ==1){
+        if(y<(room.getY()+24) && x<((room.getDoors()[i].getX())-24+10) && x>((room.getDoors()[i].getX()) -24-10))
+        {
+          x = x;
+          y = y;
+        }
+        else{
+          if(x<room.getX()-24)
+          x = room.getX()-24;
+          else if(y<room.getY()-24)
+          y = room.getY()-24;
+          else if(x>(room.getX()+room.getW()-24))
+          x = room.getX()+room.getW()-24;
+          else if(y>(room.getY() + room.getH()-24))
+          y = room.getY() + room.getH()-24;
+        }
+      }
+      */
+      /*
+      else if(cote ==3){
+        if(y>(room.getY()+room.getH()-24) && x<((room.getDoors()[i].getX())-24+10) && x>((room.getDoors()[i].getX()) -24-10))
+        {
+          x = x;
+          y = y;
+        }
+        else{
+          if(x<room.getX()-24)
+          x = room.getX()-24;
+          else if(y<room.getY()-24)
+          y = room.getY()-24;
+          else if(x>(room.getX()+room.getW()-24))
+          x = room.getX()+room.getW()-24;
+          else if(y>(room.getY() + room.getH()-24))
+          y = room.getY() + room.getH()-24;
+        }
+      }
+      */
+      this->x = x;
+      this->y = y;
+      sprite.setPosition(x, y);
 
-  //this->room = room_name;
-  //cout << this->room << endl;
 }
 
 //destructeur de player

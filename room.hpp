@@ -26,6 +26,7 @@ class Room : public GameElement
     int getL() {return this->l;}
     int getC() {return this->c;}
     string getName() {return this->nom;}
+    vector<Door> getDoors() {return this->doors;}
     sf::Color getDataColor (const int i, const int j) {return data[i][j].getFillColor();}
     sf::RectangleShape& getRectangle() {return this->rectangle;}
 

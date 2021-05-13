@@ -86,14 +86,14 @@ void Appartment::inRoom(Player& player){
       int posLocalPlayerX = (posXPlayer - posXRoom) + player.getW()/2 ;
       int posLocalPlayerY = (posYPlayer - posYRoom) + player.getH()/2 ;
 
-      cout << posLocalPlayerX << endl;
+      //cout << "posLocalPlayerX"<< posLocalPlayerX << endl;
+      //cout << "posLocalPlayerY"<< posLocalPlayerY << endl;
       for (int k=0; k<rooms[i].getC(); k++)
       {
         for (int j=0; j<rooms[i].getL(); j++)
         {
           if(k*(rooms[i].getW()/rooms[i].getC())<=posLocalPlayerX && posLocalPlayerX<=(k+1)*(rooms[i].getW()/rooms[i].getC()) && j*(rooms[i].getH()/rooms[i].getL())<=posLocalPlayerY && posLocalPlayerY<=(j+1)*(rooms[i].getH()/rooms[i].getL()))
           {
-            cout << "hello" << endl;
             if(player.getName().compare("joey") == 0){
               rooms[i](k,j).setOutlineColor(sf::Color::Transparent);
               rooms[i](k,j).setFillColor(sf::Color(105, 105, 105, 192));

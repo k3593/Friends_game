@@ -10,20 +10,25 @@ Game::Game()
 {
   //Création des pièces de l'appartement
   //Création de la première pièce
-  Door door1_room1(90+120, 350+20, 0, 0, "door1");
+  Door door1_room1(90+120, 350+20, 0, 0, "door1", 90, 2);
+  Door door2_room1(90, 350+20, 0, 0, "door1", 90, 0);
   Room room1(10, 10, 90, 350, 120, 120, "Bedroom_chandler");
   room1.addDoor(door1_room1);
+  room1.addDoor(door2_room1);
   //Création de la deuxième pièce
   Room room2(10, 10, 90, 500, 130, 130, "Bedroom_joey");
-  Room room3(10, 10, 240, 380, 180, 130, "Living");
+  Room room3(10, 10, 240, 360, 180, 130, "Living");
   Room room4(10, 10, 920, 200, 110, 110, "Bedroom_Monica");
   Room room5(5, 5, 640, 180, 60, 70, "Bathroom_Monica");
   Room room6(8, 8, 650, 300, 200, 130, "Living_Monica");
   Room room7(6, 6, 750, 200, 120, 80, "Living_Monica_2");
   Room room8(6, 6, 920, 350, 110, 100, "Guest_room");
   Room room9(6, 6, 360, 205, 80, 60, "Bathroom_Joey");
+  cout << "Initialisation appart terminée" << endl;
   //Remplissage de l'appartement avec les pièces
   appart.addRoom(room1);
+  cout << "hello" << endl;
+
   appart.addRoom(room2);
   appart.addRoom(room3);
   appart.addRoom(room4);
@@ -32,6 +37,7 @@ Game::Game()
   appart.addRoom(room7);
   appart.addRoom(room8);
   appart.addRoom(room9);
+  cout << "Initialisation appart terminée" << endl;
 
   if(!icone.loadFromFile("icone.png"))
   {
