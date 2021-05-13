@@ -10,7 +10,7 @@
 using namespace std;
 
 //Constructeur Room
-Room::Room(int l, int c, int x, int y, int w, int h, string nom, int d_x, int d_y)
+Room::Room(int l, int c, int x, int y, int w, int h, string nom)
 {
   cout << "Initialisation d'une pièce" << endl;
   this->l = l;
@@ -19,8 +19,6 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom, int d_x, int d_
   this->y = y;
   this->w = w;
   this->h = h;
-  this->d_x = d_x;
-  this->d_y = d_y;
   this->nom = nom;
 
   //declaration du contour de la room
@@ -31,17 +29,6 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom, int d_x, int d_
   rectangle.setPosition(x, y);
   rectangle.setFillColor(sf::Color::Transparent);
   this->rectangle = rectangle;
-
-  //declaration de la ligne de la porte
-  int length = 20;
-  sf::RectangleShape line;
-  line.setSize(sf::Vector2f(length, 2));
-  line.setOutlineColor(sf::Color::Red);
-  line.setOutlineThickness(length/2);
-  line.setPosition(x +d_x-5, y+d_y);
-  line.setFillColor(sf::Color::Transparent);
-  line.rotate(90);
-  this->door = line;
 
   int i,j;
   int cpt=0;//compteur de rouge
@@ -117,6 +104,17 @@ void Room::affichage(sf::RenderWindow& window){
       window.draw(data[i][j]);
     }
   }
+}
+
+void Room::affichageDoors(sf::RenderWindow& window){
+  for (int i=0; i<doors.size(); i++)
+  {
+    window.draw(this->doors[i].getDoor());
+  }
+}
+
+void Room::addDoor(Door& door_name){
+  this->doors.push_back(door_name);
 }
 
 
