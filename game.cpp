@@ -131,7 +131,14 @@ void Game::menu()
               break;
           }
       }
-      window_menu.clear();
+      sf::Texture background;
+      if(!background.loadFromFile("LEJEU.png"))
+      {
+        throw std::runtime_error("impossible de charger image du menu");
+      }
+      sf::Sprite spriteBackground;
+      spriteBackground.setTexture(background);
+      window_menu.draw(spriteBackground);
       menu.draw(window_menu);
       window_menu.display();
 
