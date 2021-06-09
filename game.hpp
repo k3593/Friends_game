@@ -25,6 +25,7 @@ class Game
   private:
     sf::Music music;
     sf::Music music_joey;
+    sf::Music music_monica;
     float windowHeight = 721;
     float windowWidht = 1109;
     Appartment appart{10, 10, 10, 10, "appart", "apartment.jpeg"};

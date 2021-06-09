@@ -96,7 +96,7 @@ Game::Game()
   //sounds
   music.openFromFile("friends_song.ogg");
   music_joey.openFromFile("how_you_doin.ogg");
-
+  music_monica.openFromFile("monica.ogg");
 }
 
 void Game::menu()
@@ -421,9 +421,11 @@ void Game::play()
       if(appart.getPlayer(0).getScore()>appart.getPlayer(1).getScore())
       {
         music.stop();
+        music_monica.play();
         popUp("Joey t'es nul","WinM.png");
       }
       else
+        music.stop();
         music_joey.play();
         popUp("Monica t'es nulle","WinJ.png");
 
