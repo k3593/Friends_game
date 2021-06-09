@@ -10,20 +10,20 @@ Game::Game()
 {
   //Création des pièces de l'appartement
   //Création de la première pièce
-  Door door1_room1(90+120, 350+20, 0, 0, "door1", 90, 2);
-  Door door2_room1(90, 350+20, 0, 0, "door2", 90, 0);
+  Door door1_room1(90+120, 350+20, 20, 0, "door1", 90, 2);
+  Door door2_room1(90, 350+20, 20, 0, "door2", 90, 0);
   Room room1(10, 10, 90, 350, 120, 120, "Bedroom_chandler");
   room1.addDoor(door1_room1);
   room1.addDoor(door2_room1);
   //Création de la deuxième pièce
-  Door door1_room2(90+130, 500+10, 0, 0, "door1", 90, 2);
+  Door door1_room2(90+130, 500+10, 20, 0, "door1", 90, 2);
   Room room2(10, 10, 90, 500, 130, 130, "Bedroom_joey");
   room2.addDoor(door1_room2);
   //Création de la troisième pièce
-  Door door1_room3(240+240, 360+60, 0, 0, "door1", 90, 2);
-  Door door2_room3(240, 360+20, 0, 0, "door2", 90, 0);
-  Door door3_room3(240, 360+140, 0, 0, "door2", 90, 0);
-  Door door4_room3(240+120, 360, 0, 0, "door2", 180, 1);
+  Door door1_room3(240+240, 360+60, 20, 0, "door1", 90, 2);
+  Door door2_room3(240, 360+20, 20, 0, "door2", 90, 0);
+  Door door3_room3(240, 360+140, 20, 0, "door2", 90, 0);
+  Door door4_room3(240+140, 360, 40, 0, "door2", 180, 1);
   Room room3(10, 10, 240, 360, 240, 160, "Living");
   room3.addDoor(door1_room3);
   room3.addDoor(door2_room3);
@@ -31,30 +31,43 @@ Game::Game()
   room3.addDoor(door4_room3);
 
   //Création de la quatrième pièce
-  Door door1_room10(500+90, 400+20, 0, 0, "door1", 90, 2);
-  Door door2_room10(500, 400+20, 0, 0, "door2", 90, 0);
+  Door door1_room10(500+90, 400+20, 20, 0, "door1", 90, 2);
+  Door door2_room10(500, 400+20, 20, 0, "door2", 90, 0);
   Room room10(5,5,500, 400, 90, 120, "corridor");
   room10.addDoor(door1_room10);
   room10.addDoor(door2_room10);
 
 
+  Door door1_room4(920, 200+30, 20, 0, "door1", 90, 0);
   Room room4(10, 10, 920, 200, 110, 110, "Bedroom_Monica");
+  room4.addDoor(door1_room4);
+  Door door1_room5(640+60, 200, 20, 0, "door1", 90, 2);
   Room room5(5, 5, 640, 180, 60, 70, "Bathroom_Monica");
+  room5.addDoor(door1_room5);
   //Création de la sixième pièce
-  Door door1_room6(650, 300+120, 0, 0, "door1", 90, 0);
-  Door door2_room6(650+230, 300+50, 0, 0, "door2", 90, 2);
+  Door door1_room6(650, 300+120, 20, 0, "door1", 90, 0);
+  Door door2_room6(650+230, 300+50, 20, 0, "door2", 90, 2);
+  Door door3_room6(650+210, 300, 150, 0, "door1", 180, 1);
   Room room6(8, 8, 650, 300, 230, 130, "Living_Monica");
   room6.addDoor(door1_room6);
   room6.addDoor(door2_room6);
+  room6.addDoor(door3_room6);
 
+  Door door1_room7(860, 300, 150, 0, "door1", 180, 3);
+  Door door2_room7(750, 200, 20, 0, "door1", 90, 0);
+  Door door3_room7(750+120, 200+30, 20, 0, "door1", 90, 2);
   Room room7(6, 6, 750, 200, 120, 80, "Living_Monica_2");
+  room7.addDoor(door1_room7);
+  room7.addDoor(door2_room7);
+  room7.addDoor(door3_room7);
+
   //Création de la sixième pièce
-  Door door1_room8(920, 350, 0, 0, "door1", 90, 0);
+  Door door1_room8(920, 350, 20, 0, "door1", 90, 0);
   Room room8(6, 6, 920, 350, 110, 100, "Guest_room");
   room8.addDoor(door1_room8);
 
   //Création de la 9 pièce
-  Door door1_room9(360+40, 205+60, 0, 0, "door1", 180, 3);
+  Door door1_room9(360+40, 205+60, 20, 0, "door1", 180, 3);
   Room room9(6, 6, 360, 205, 80, 60, "Bathroom_Joey");
   room9.addDoor(door1_room9);
   cout << "Initialisation appart terminée" << endl;
@@ -208,7 +221,7 @@ void Game::popUp(string titre, string image)
     window_popUp.draw(spriteBackground);
     window_popUp.display();
   }
-  
+
 }
 
 void Game::play()
@@ -385,7 +398,7 @@ void Game::play()
       }
       else
         popUp("Monica t'es nulle","WinJ.png");
-      
+
       window_game.close();
     }
   }

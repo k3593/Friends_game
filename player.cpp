@@ -38,13 +38,15 @@ Player::Player(int x, int y, int w, int h, string nom, string filename, Room roo
 
 void Player::update(int x, int y){
     int state=0;
+
     cout << room.getName() << endl;
     for (int i=0; i<room.getDoors().size(); i++)
     {
+      int w = room.getDoors()[i].getW();
       int cote = room.getDoors()[i].getCote();
       switch (cote) {
         case 0:
-        if(x<(room.getX()-20) && y<((room.getDoors()[i].getY())-24+10) && y>((room.getDoors()[i].getY()) -24-10))
+        if(x<(room.getX()-(w)) && y<((room.getDoors()[i].getY())-24+(w/2)) && y>((room.getDoors()[i].getY()) -24-(w/2)))
         {
           x = x;
           y = y;
@@ -55,7 +57,7 @@ void Player::update(int x, int y){
         }
         break;
         case 2:
-        if(x>(room.getX()+room.getW()-24) && y<((room.getDoors()[i].getY())-24+10) && y>((room.getDoors()[i].getY()) -24-10))
+        if(x>(room.getX()+room.getW()-24) && y<((room.getDoors()[i].getY())-24+w/2) && y>((room.getDoors()[i].getY()) -24-w/2))
         {
           x = x;
           y = y;
@@ -66,7 +68,12 @@ void Player::update(int x, int y){
         }
         break;
         case 1:
-        if(y<(room.getY()-20) && x<((room.getDoors()[i].getX())-24+10) && x>((room.getDoors()[i].getX()) -24-10))
+        cout << x << endl;
+        cout << y << endl;
+        cout << (room.getY()-w) << endl;
+        cout << ((room.getDoors()[i].getX())-24+w/2) << endl;
+        cout << ((room.getDoors()[i].getX()) -24-w/2) << endl;
+        if(y<(room.getY()+10) && x<((room.getDoors()[i].getX())-36+w/2) && x>((room.getDoors()[i].getX()) -36-w))
         {
           x = x;
           y = y;
@@ -76,7 +83,7 @@ void Player::update(int x, int y){
           state = 1;
         }
         case 3:
-        if(y>(room.getY()+room.getH()-24) && x<((room.getDoors()[i].getX())-24+10) && x>((room.getDoors()[i].getX()) -24-10))
+        if(y>(room.getY()+room.getH()-24) && x<((room.getDoors()[i].getX())-36+w/2) && x>((room.getDoors()[i].getX()) -36-w))
         {
           x = x;
           y = y;
