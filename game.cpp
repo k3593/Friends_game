@@ -4,6 +4,7 @@
 #include "menu.hpp"
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <sstream>
 
 Game::Game()
@@ -11,10 +12,8 @@ Game::Game()
   //Création des pièces de l'appartement
   //Création de la première pièce
   Door door1_room1(90+120, 350+20, 20, 0, "door1", 90, 2);
-  Door door2_room1(90, 350+20, 20, 0, "door2", 90, 0);
   Room room1(10, 10, 90, 350, 120, 120, "Bedroom_chandler");
   room1.addDoor(door1_room1);
-  room1.addDoor(door2_room1);
   //Création de la deuxième pièce
   Door door1_room2(90+130, 500+10, 20, 0, "door1", 90, 2);
   Room room2(10, 10, 90, 500, 130, 130, "Bedroom_joey");
@@ -94,6 +93,10 @@ Game::Game()
   initText();
   initChrono();
 
+  //sounds
+  music.openFromFile("friends_song.ogg");
+  music_joey.openFromFile("how_you_doin.ogg");
+
 }
 
 void Game::menu()
@@ -104,10 +107,10 @@ void Game::menu()
   //Création du menu
   Menu menu(window_menu.getSize().x, window_menu.getSize().y);
 
+  music.play();
   while (window_menu.isOpen())
   {
       sf::Event event;
-
       while (window_menu.pollEvent(event))
       {
           switch(event.type)
@@ -126,7 +129,9 @@ void Game::menu()
                   {
                     case 0:
                       std::cout << "bouton play" << std::endl;
+
                       this->play();
+
                       break;
                     case 1:
                       std::cout << "bouton options" << std::endl;
@@ -251,8 +256,17 @@ void Game::play()
   //création des horloges
   sf::Clock time1;
   sf::Clock time2;
+  sf::Clock time3;
   sf::Clock chrono;
 
+
+  //sounds
+
+  sf::SoundBuffer buffer;
+  buffer.loadFromFile("pas.wav");
+
+  sf::Sound sound;
+  sound.setBuffer(buffer);
 
   while (window_game.isOpen())
   {
@@ -286,7 +300,7 @@ void Game::play()
             updateFPS2=false;//sinon on ne l'a fait pas
         }
     }
-    if(chrono.getElapsedTime().asSeconds()<45)
+    if(chrono.getElapsedTime().asSeconds()<10)
     {
       sf::Vector2f posMonica = p1.getSprite().getPosition();
       sf::Vector2f posJoey = p2.getSprite().getPosition();
@@ -294,6 +308,7 @@ void Game::play()
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
       {
               anim1.y=Left;
+
               posMonica.x = posMonica.x-1;
               posMonica.y = posMonica.y;
       }
@@ -351,6 +366,11 @@ void Game::play()
               anim1.x=0;
           time1.restart();
         }
+        if(time3.getElapsedTime().asMilliseconds() >= 500)
+        {
+          sound.play();
+          time3.restart();
+        }
       }
       if(updateFPS2==true)
       {
@@ -360,6 +380,11 @@ void Game::play()
           if(anim2.x*48 >= p2.getW()*3)
               anim2.x=0;
           time2.restart();
+        }
+        if(time3.getElapsedTime().asMilliseconds() >= 500)
+        {
+          sound.play();
+          time3.restart();
         }
       }
       sf::Sprite s1=p1.getSprite();
@@ -392,11 +417,14 @@ void Game::play()
     }
     else
     {
+      //music.stop();
       if(appart.getPlayer(0).getScore()>appart.getPlayer(1).getScore())
       {
+        music.stop();
         popUp("Joey t'es nul","WinM.png");
       }
       else
+        music_joey.play();
         popUp("Monica t'es nulle","WinJ.png");
 
       window_game.close();

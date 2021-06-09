@@ -1,7 +1,7 @@
 all : main
 
 main : main.o gameElement.o player.o room.o appartment.o game.o menu.o door.o
-	g++ -Wall -o main main.o gameElement.o room.o player.o appartment.o game.o menu.o door.o -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -Wall -o main main.o gameElement.o room.o player.o appartment.o game.o menu.o door.o -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
 gameElement.o : gameElement.cpp gameElement.hpp
 	g++ -Wall -c gameElement.cpp

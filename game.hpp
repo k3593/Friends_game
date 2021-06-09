@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "appartment.hpp"
 using namespace std;
 
@@ -22,6 +23,8 @@ class Game
     void updateText();
     void updateChrono(sf::Clock chrono);
   private:
+    sf::Music music;
+    sf::Music music_joey;
     float windowHeight = 721;
     float windowWidht = 1109;
     Appartment appart{10, 10, 10, 10, "appart", "apartment.jpeg"};
