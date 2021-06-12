@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
-Objet::Objet(Room room, string filename)
+Objet::Objet(string name, string filename)
 {
         /* initialize random seed: */
     srand (time(NULL));
@@ -16,11 +16,8 @@ Objet::Objet(Room room, string filename)
     cout << "Création de l'objet" << endl;
     this->w = 10;
     this->h = 10;
-    this->x =  rand() % room.getW() + room.getX();
-    this->y =  rand() % room.getH() + room.getY();
-    this->nom = 'bonus';
+    this->nom = name;
     this->etat = 1;
-    this->room=room;
 
     //Generation du sprite
     sf::Texture image;

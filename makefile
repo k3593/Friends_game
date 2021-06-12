@@ -12,7 +12,7 @@ main : main.o gameElement.o player.o room.o appartment.o game.o menu.o door.o ob
 gameElement.o : gameElement.cpp gameElement.hpp
 	g++ -Wall -c gameElement.cpp
 
-room.o : room.cpp room.hpp gameElement.hpp
+room.o : room.cpp room.hpp gameElement.hpp objet.hpp
 	g++ -Wall -c room.cpp
 
 door.o : door.cpp door.hpp gameElement.hpp
@@ -30,10 +30,10 @@ game.o : game.cpp game.hpp appartment.hpp
 menu.o : menu.cpp menu.hpp
 	g++ -Wall -c menu.cpp
 
-objet.o : objet.cpp objet.hpp gameElement.hpp room.hpp player.hpp
+objet.o : objet.cpp objet.hpp gameElement.hpp player.hpp
 	g++ -Wall -c objet.cpp
 
-bonus.o : bonus.cpp bonus.hpp objet.hpp room.hpp player.hpp
+bonus.o : bonus.cpp bonus.hpp objet.hpp player.hpp
 	g++ -Wall -c bonus.cpp
 
 main.o: main.cpp gameElement.hpp player.hpp room.hpp appartment.hpp game.hpp menu.hpp door.hpp objet.hpp bonus.hpp

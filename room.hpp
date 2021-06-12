@@ -50,6 +50,5 @@ class Room : public GameElement
     sf::RectangleShape rectangle;
     vector<Door> doors;
     vector<Objet> objets;
-
 };
 #endif

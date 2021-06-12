@@ -8,7 +8,7 @@ using namespace std;
 
 
 //Constructeur Bonus
-Bonus::Bonus(Room room) : Objet(room, "bonus.png")
+Bonus::Bonus() : Objet("bonus", "bonus.png")
 {
     return;
 }

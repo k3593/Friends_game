@@ -6,7 +6,6 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-#include "room.hpp"
 #include "player.hpp"
 #include "bonus.hpp"
 #include "objet.hpp"
@@ -17,7 +16,7 @@ class Bonus : public Objet
 {
   public:
     //constructeur
-    Bonus(Room room);
+    Bonus();
     //effet de bonus : rajouter 10pts au player qui l'a
     void fonction(Player& player);
 };
