@@ -54,6 +54,8 @@ Game::Game()
   Door door2_room6(650+230, 300+50, 20, 0, "door2", 90, 2);
   Door door3_room6(650+210, 300, 150, 0, "door1", 180, 1);
   Room room6(8, 8, 650, 300, 230, 130, "Living_Monica");
+  Objet* bonus2 = new Objet("bonus", "unit1.png", 650+20, 300+20);
+  room6.addObjet(bonus2);
   room6.addDoor(door1_room6);
   room6.addDoor(door2_room6);
   room6.addDoor(door3_room6);
