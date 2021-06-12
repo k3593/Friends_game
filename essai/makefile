@@ -1,10 +1,4 @@
- CPP=g++
- LD=g++
- RM=rm -f
- CFLAGS=-Wall -std=c++17
- LDFLAGS=-Wall -std=c++17
-
-all : main 
+all : main
 test : test_catch
 
 main : main.o gameElement.o player.o room.o appartment.o game.o menu.o door.o objet.o
@@ -38,25 +32,26 @@ main.o: main.cpp gameElement.hpp player.hpp room.hpp appartment.hpp game.hpp men
 	g++ -Wall -c main.cpp
 
 # Tests
-test_catch: test_catch_room.o test_catch_player.o test_catch_appartment.o test_catch_door.o player.o gameElement.o room.o appartment.o objet.o door.o
-	$(LD) -o test_catch test_catch_room.o test_catch_player.o test_catch_appartment.o test_catch_door.o player.o gameElement.o room.o appartment.o objet.o door.o -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
-	
+test_catch: test_catch_room.o test_catch_objet.o test_catch_player.o test_catch_appartment.o test_catch_door.o player.o gameElement.o room.o appartment.o objet.o door.o
+	g++ -o test_catch test_catch_room.o test_catch_objet.o test_catch_player.o test_catch_appartment.o test_catch_door.o player.o gameElement.o room.o appartment.o objet.o door.o -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+
 test_catch_player.o: test_catch_player.cpp player.hpp gameElement.hpp room.hpp appartment.hpp catch.hpp objet.hpp
-	$(CPP) -c test_catch_player.cpp
+	g++ -c test_catch_player.cpp
 
 test_catch_appartment.o: test_catch_appartment.cpp player.hpp gameElement.hpp room.hpp appartment.hpp catch.hpp objet.hpp
-	$(CPP) -c test_catch_appartment.cpp
+	g++ -c test_catch_appartment.cpp
 
-test_catch_door.o: test_catch_door.cpp door.hpp 
-	$(CPP) -c test_catch_door.cpp
+test_catch_door.o: test_catch_door.cpp door.hpp
+	g++ -c test_catch_door.cpp
+
+test_catch_objet.o: test_catch_objet.cpp objet.hpp
+	g++ -c test_catch_objet.cpp
 
 test_catch_room.o: test_catch_room.cpp door.hpp objet.hpp room.hpp
-	$(CPP) -c test_catch_room.cpp
+	g++ -c test_catch_room.cpp
 
 clean:
 	rm -f *.o test_catch
 
 vclean: clean
 	rm -f main
-
-
