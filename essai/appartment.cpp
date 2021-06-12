@@ -47,7 +47,7 @@ void Appartment::addPlayer(Player& nom){
 }
 
 //calcul du score d'un joueur
-void Appartment::calculScore(Player& nom) 
+void Appartment::calculScore(Player& nom)
 {
   int i,j,k;
   nom.setScore(0);
@@ -70,7 +70,7 @@ void Appartment::calculScore(Player& nom)
       }
     //cout << "score de " << nom.getName()<<" dans " << rooms[i].getName()<< " : " << nom.getScore() << endl;
   }
-  
+
   for(j=0; j<nom.getMyObjets().size(); j++){
     //cout << "taille sac"<< nom.getMyObjets().size() <<endl;
     nom.setScore(nom.getScore() + nom.getMyObjets()[j].getScore());
@@ -130,7 +130,7 @@ void Appartment::affichage(sf::RenderWindow& window){
   for (int i=0; i<this->rooms.size(); i=i+1)
   {
       rooms[i].affichage(window);
-      rooms[i].affichageDoors(window);
+      //rooms[i].affichageDoors(window);
       rooms[i].affichageObjets(window);
   }
 }
