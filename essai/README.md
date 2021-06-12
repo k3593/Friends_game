@@ -43,4 +43,6 @@ Nous sommes particulièrement fier de ce projet car nous avons globalement réus
 De plus, il nous as été particulièrement agréable de travailler en binôme car la communication été très claire et les deux parties impliquées. #thamille_BestBinome
 
 Explication de l'organisation au sein du binôme:
-     ?
+Nous avons travaillé sur GIT pour rendre le développement en binôme efficace.
+Pour chaque fonctionnalité du jeu, nous avons créer une nouvelle branche sur git. Cela nous a permit de rendre le projet modulaire.
+Nous avons travailler en autonomie et nous avons mis en commun notre travaille régulièrement.
