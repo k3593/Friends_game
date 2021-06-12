@@ -48,7 +48,6 @@ void Player::update(int x, int y){
         case 0:
         if(x<(room.getX()-(w)) && y<((room.getDoors()[i].getY())-24+(w/2)) && y>((room.getDoors()[i].getY()) -24-(w/2)))
         {
-          cout << "hello0" << endl;
           x = x;
           y = y;
           this->x = x;
@@ -60,8 +59,6 @@ void Player::update(int x, int y){
         case 2:
         if(x>(room.getX()+room.getW()-24) && y<((room.getDoors()[i].getY())-24+w/2) && y>((room.getDoors()[i].getY()) -24-w/2))
         {
-
-          cout << "hello2" << endl;
           x = x;
           y = y;
           this->x = x;
@@ -72,12 +69,8 @@ void Player::update(int x, int y){
         break;
         case 1:
 
-        cout << "positionY" << y << endl;
-        cout << "roomY" << (room.getY()+10) << endl;
-
         if(y<(room.getY()+10) && x<((room.getDoors()[i].getX())-36+w/2) && x>((room.getDoors()[i].getX()) -36-w))
         {
-          cout << "hello1" << endl;
           x = x;
           y = y;
           this->x = x;
@@ -88,7 +81,6 @@ void Player::update(int x, int y){
         case 3:
         if(y>(room.getY()+room.getH()-24) && x<((room.getDoors()[i].getX())-36+w/2) && x>((room.getDoors()[i].getX()) -36-w))
         {
-          cout << "hello3" << endl;
           x = x;
           y = y;
           this->x = x;
@@ -100,7 +92,6 @@ void Player::update(int x, int y){
     }
 
         if(state == 0){
-          cout <<"hello4"<<endl;
           if(x<room.getX()-24)
             x = room.getX()-24;
           else if(y<room.getY()-24){

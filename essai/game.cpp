@@ -73,6 +73,15 @@ Game::Game()
   room9.addDoor(door1_room9);
   //cout << "Initialisation appart terminée" << endl;
 
+
+  //création des objets
+  Objet* bonus1 = new Objet("bonus", "bonus.png", 240+10, 360+10);
+  room3.addObjet(bonus1);
+  Objet* bonus2 = new Objet("bonus", "unit1.png", 650+20, 300+20);
+  room6.addObjet(bonus2);
+  cout<<"salle3"<<room3.getObjets().size()<<endl;
+  cout<<"salle6"<<room6.getObjets().size()<<endl;
+
   //Remplissage de l'appartement avec les pièces
   appart.addRoom(room1);
   appart.addRoom(room2);
@@ -85,14 +94,6 @@ Game::Game()
   appart.addRoom(room9);
   appart.addRoom(room10);
   //cout << "Initialisation appart terminée" << endl;
-
-  //création des objets
-  Objet* bonus1 = new Objet("bonus", "bonus.png", 240+10, 360+10);
-  room3.addObjet(bonus1);
-  Objet* bonus2 = new Objet("bonus", "unit1.png", 650+20, 300+20);
-  room6.addObjet(bonus2);
-  cout<<"salle3"<<room3.getObjets().size()<<endl;
-  cout<<"salle6"<<room6.getObjets().size()<<endl;
 
 
   //icone de la fenetre
