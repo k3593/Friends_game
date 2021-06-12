@@ -1,7 +1,3 @@
-#include "appartment.hpp"
-#include "room.hpp"
-#include "gameElement.hpp"
-#include "player.hpp"
 #include "objet.hpp"
 
 #include <iostream>
@@ -46,4 +42,3 @@ void Objet::affichage(sf::RenderWindow& window)
     sprite.setPosition(this->x, this->y);
     window.draw(this->sprite);
 }
-

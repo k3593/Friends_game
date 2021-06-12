@@ -1,11 +1,3 @@
-#include "appartment.hpp"
-#include "room.hpp"
-#include "gameElement.hpp"
-#include "player.hpp"
-#include "bonus.hpp"
-#include "door.hpp"
-#include "objet.hpp"
-
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -24,7 +16,5 @@ Bonus::Bonus(Room room) : Objet(room, "bonus.png")
 //effet de bonus sur le jeu
 void Bonus::fonction(Player& player)
 {
-    player.setScore(player.getScore()+10); 
+    player.setScore(player.getScore()+10);
 }
-
-

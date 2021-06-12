@@ -6,13 +6,10 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-#include "appartment.hpp"
 #include "room.hpp"
-#include "gameElement.hpp"
 #include "player.hpp"
 #include "bonus.hpp"
 #include "objet.hpp"
-#include "door.hpp"
 
 using namespace std;
 
