@@ -15,7 +15,7 @@ class Objet : public GameElement
 {
   public:
   //constructeurs
-    Objet(string name, string filename);
+    Objet(string name, string filename, int x, int y);
     Objet();
     ~Objet();
     //getters

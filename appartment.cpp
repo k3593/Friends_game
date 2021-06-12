@@ -99,9 +99,9 @@ void Appartment::inRoom(Player& player){
         cout << rooms[i].getObjets()[k].getX() << endl;
         cout << rooms[i].getObjets()[k].getY() << endl;
         */
-        if(rooms[i].getObjets()[k].getX()-10 < posXPlayer && posXPlayer < rooms[i].getObjets()[k].getX()+10 && rooms[i].getObjets()[k].getY()-10 < posYPlayer && posYPlayer < rooms[i].getObjets()[k].getY()+10){
+        if(rooms[i].getObjets()[k]->getX()-10 < posXPlayer && posXPlayer < rooms[i].getObjets()[k]->getX()+10 && rooms[i].getObjets()[k]->getY()-10 < posYPlayer && posYPlayer < rooms[i].getObjets()[k]->getY()+10){
           //Ajouter l'objet dans le sac à dos du joueur
-          player.addObjet(rooms[i].getObjets()[k]);
+          player.addObjet(*rooms[i].getObjets()[k]);
 
           cout << "avan" << player.getMyObjets().size()<<endl;
           //Supprimer l'objet de la salle

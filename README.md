@@ -6,7 +6,7 @@ Auteurs :
     HENRY-SEIMANDI Camille
 
 Liste des bibliothèques, frame work, outils externes :
-    ?
+    SFML
 
 Manuel d'utilisation :
     Le jeu se base dans l'univers de Friends, il y a deux joueurs en compétitions. L'un, Joey, dont le but est de salir le plus possible (déplacement QSDZ). L'autre, Manica dont le but est de nettoyer le plus possible (déplacement flèches). Pour ce faire les joueurs disposent de ?? sec. De plus, le jeu est parsemé de quelques petit bonus.

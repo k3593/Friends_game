@@ -2,7 +2,7 @@
 #include "gameElement.hpp"
 #include "appartment.hpp"
 #include "menu.hpp"
-#include "bonus.hpp"
+#include "objet.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -25,13 +25,15 @@ Game::Game()
   Door door3_room3(240, 360+140, 20, 0, "door2", 90, 0);
   Door door4_room3(240+140, 360, 40, 0, "door2", 180, 1);
   //création du premier objet
-  Bonus bonus1(240+10, 360+10);
+  //Objet bonus1("bonus", "bonus.png", 240+10, 360+10);
   Room room3(10, 10, 240, 360, 240, 160, "Living");
   room3.addDoor(door1_room3);
   room3.addDoor(door2_room3);
   room3.addDoor(door3_room3);
   room3.addDoor(door4_room3);
+  Objet* bonus1 = new Objet("bonus", "bonus.png", 240+10, 360+10);
   room3.addObjet(bonus1);
+  //room3.addObjet(bonus1);
 
   //Création de la quatrième pièce
   Door door1_room10(500+90, 400+20, 20, 0, "door1", 90, 2);
@@ -424,6 +426,7 @@ void Game::play()
       window_game.draw(appart.getSprite());
       appart.affichage(window_game);
 
+      //window_game.draw(appart.get)
       window_game.draw(p1.getSprite());
       window_game.draw(p2.getSprite());
       window_game.draw(text);

@@ -29,7 +29,7 @@ class Room : public GameElement
     int getC() {return this->c;}
     string getName() {return this->nom;}
     vector<Door> getDoors() {return this->doors;}
-    vector<Objet>& getObjets() {return this->objets;}
+    vector<Objet*>& getObjets() {return this->objets;}
     sf::Color getDataColor (const int i, const int j) {return data[i][j].getFillColor();}
     sf::RectangleShape& getRectangle() {return this->rectangle;}
 
@@ -42,7 +42,7 @@ class Room : public GameElement
       }
     }
     void addDoor(Door& door_name);
-    void addObjet(Objet& objet_name);
+    void addObjet(Objet* objet_name);
 
   protected:
     int l; //nombre de lignes
@@ -50,6 +50,6 @@ class Room : public GameElement
     sf::RectangleShape **data;
     sf::RectangleShape rectangle;
     vector<Door> doors;
-    vector<Objet> objets;
+    vector<Objet*> objets;
 };
 #endif

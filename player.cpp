@@ -23,7 +23,7 @@ Player::Player(int x, int y, int w, int h, string nom, string filename, Room roo
     if(!texture.loadFromFile(filename))
     {
         throw std::runtime_error("impossible de charger image du player");
-        }
+    }
     this->texture = texture;
     sf::Sprite sprite;
     sprite.setPosition(x, y);
