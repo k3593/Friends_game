@@ -10,8 +10,6 @@
 #include "room.hpp"
 #include "gameElement.hpp"
 #include "player.hpp"
-#include "objet.hpp"
-#include "bonus.hpp"
 
 using namespace std;
 
@@ -35,8 +33,6 @@ class Appartment : public GameElement
     vector<Room> getRooms() {return this->rooms;}
     //Verifier dans quelle pièce le joueur est.
     void inRoom(Player& player);
-    //placement aléatoire des objets
-    void creationObjet();
     //affichage appartement
     void affichage(sf::RenderWindow& window);
   protected:

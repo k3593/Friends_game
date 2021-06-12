@@ -394,22 +394,6 @@ void Game::play()
       s2.setTextureRect(sf::IntRect(anim2.x*48, anim2.y*48, 48, 48));
       p2.setSprite(s2);
 
-      //gestion des bonus
-      for (int i=0;i<=1;i++)
-      {
-        for (int j=0;j<=appart.getRooms().size();j++)//parcours des salles
-        {
-          vector<Objet> obj = appart.getRoom(j).getObjets();//on récupère les objets de chaque salle
-          for(int k=0; k<obj.size(); k++)
-          {
-            if((appart.getPlayer(i).getX()== obj[k].getX()) && (appart.getPlayer(i).getY()==obj[k].getY()))//si un des joueurs est à la meme position en X et Y  qu'un bonus 
-            {
-              obj[k].fonction(appart.getPlayer(i));
-            }
-          }
-        }
-      }
-
       //calcul du score
       for(int i=0; i<2; i++)
         appart.calculScore(appart.getPlayer(i));

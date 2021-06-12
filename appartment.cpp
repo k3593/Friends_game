@@ -1,10 +1,5 @@
 
 #include "appartment.hpp"
-#include "room.hpp"
-#include "gameElement.hpp"
-#include "player.hpp"
-#include "objet.hpp"
-#include "bonus.hpp"
 
 #include <iostream>
 #include <string>
@@ -110,11 +105,6 @@ void Appartment::inRoom(Player& player){
       }
     }
   }
-}
-
-void Appartment :: creationObjet()
-{
-  Bonus bon(rooms[rand() % rooms.size()]);
 }
 
 void Appartment::affichage(sf::RenderWindow& window){

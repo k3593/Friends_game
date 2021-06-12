@@ -10,11 +10,6 @@ using namespace std;
 //Constructeur Bonus
 Bonus::Bonus() : Objet("bonus", "bonus.png")
 {
+    this->score = 10;
     return;
-}
-
-//effet de bonus sur le jeu
-void Bonus::fonction(Player& player)
-{
-    player.setScore(player.getScore()+10);
 }

@@ -30,10 +30,10 @@ game.o : game.cpp game.hpp appartment.hpp
 menu.o : menu.cpp menu.hpp
 	g++ -Wall -c menu.cpp
 
-objet.o : objet.cpp objet.hpp gameElement.hpp player.hpp
+objet.o : objet.cpp objet.hpp gameElement.hpp
 	g++ -Wall -c objet.cpp
 
-bonus.o : bonus.cpp bonus.hpp objet.hpp player.hpp
+bonus.o : bonus.cpp bonus.hpp objet.hpp
 	g++ -Wall -c bonus.cpp
 
 main.o: main.cpp gameElement.hpp player.hpp room.hpp appartment.hpp game.hpp menu.hpp door.hpp objet.hpp bonus.hpp

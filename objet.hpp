@@ -8,7 +8,6 @@
 
 #include "objet.hpp"
 #include "gameElement.hpp"
-#include "player.hpp"
 
 using namespace std;
 
@@ -21,14 +20,14 @@ class Objet : public GameElement
     ~Objet();
     //getters
     int getState() {return this->etat;}
-    //fonction de l'objet
-    void fonction(Player& player)=0;
+    int getScore() {return this->score;}
     //affichage objet
     void affichage(sf::RenderWindow& window);
   protected:
     int etat;
     sf::Texture texture;
     sf::Sprite sprite;
+    int score = 0;
 };
 
 #endif
