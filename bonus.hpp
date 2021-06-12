@@ -16,7 +16,7 @@ class Bonus : public Objet
 {
   public:
     //constructeur
-    Bonus();
+    Bonus(int x, int y);
     //effet de bonus : rajouter 10pts au player qui l'a
 };
 

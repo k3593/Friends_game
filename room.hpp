@@ -23,12 +23,13 @@ class Room : public GameElement
     //Vérification de l'état d'une pièce
     void affichage(sf::RenderWindow& window);
     void affichageDoors(sf::RenderWindow& window);
+    void affichageObjets(sf::RenderWindow& window);
     //getters
     int getL() {return this->l;}
     int getC() {return this->c;}
     string getName() {return this->nom;}
     vector<Door> getDoors() {return this->doors;}
-    vector<Objet> getObjets() {return this->objets;}
+    vector<Objet>& getObjets() {return this->objets;}
     sf::Color getDataColor (const int i, const int j) {return data[i][j].getFillColor();}
     sf::RectangleShape& getRectangle() {return this->rectangle;}
 

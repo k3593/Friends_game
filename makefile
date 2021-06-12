@@ -19,13 +19,13 @@ room.o : room.cpp room.hpp gameElement.hpp objet.hpp
 door.o : door.cpp door.hpp gameElement.hpp
 	g++ -Wall -c door.cpp
 
-player.o : player.cpp player.hpp gameElement.hpp room.hpp
+player.o : player.cpp player.hpp gameElement.hpp room.hpp objet.hpp
 	g++ -Wall -c player.cpp
 
-appartment.o : appartment.cpp appartment.hpp gameElement.hpp room.hpp player.hpp
+appartment.o : appartment.cpp appartment.hpp gameElement.hpp room.hpp player.hpp objet.hpp
 	g++ -Wall -c appartment.cpp
 
-game.o : game.cpp game.hpp appartment.hpp
+game.o : game.cpp game.hpp appartment.hpp bonus.hpp
 	g++ -Wall -c game.cpp
 
 menu.o : menu.cpp menu.hpp

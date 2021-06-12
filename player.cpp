@@ -68,11 +68,13 @@ void Player::update(int x, int y){
         }
         break;
         case 1:
+        /*
         cout << x << endl;
         cout << y << endl;
         cout << (room.getY()-w) << endl;
         cout << ((room.getDoors()[i].getX())-24+w/2) << endl;
         cout << ((room.getDoors()[i].getX()) -24-w/2) << endl;
+        */
         if(y<(room.getY()+10) && x<((room.getDoors()[i].getX())-36+w/2) && x>((room.getDoors()[i].getX()) -36-w))
         {
           x = x;
@@ -113,6 +115,12 @@ void Player::update(int x, int y){
       this->y = y;
       sprite.setPosition(x, y);
 
+}
+
+void Player::addObjet(Objet objet_name){
+  this->myObjects.push_back(objet_name);
+  cout<<"ajout"<<endl;
+  cout <<myObjects.size()<<endl;
 }
 
 //destructeur de player

@@ -21,8 +21,8 @@ class Objet : public GameElement
     //getters
     int getState() {return this->etat;}
     int getScore() {return this->score;}
-    //affichage objet
-    void affichage(sf::RenderWindow& window);
+    sf::Sprite getObjetAff() {return sprite;}
+
   protected:
     int etat;
     sf::Texture texture;

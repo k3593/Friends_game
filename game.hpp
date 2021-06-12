@@ -20,7 +20,7 @@ class Game
     void initFonts();
     void initText();
     void initChrono();
-    void updateText();
+    void updateText(int score1, int score2);
     void updateChrono(sf::Clock chrono);
   private:
     sf::Music music;
@@ -35,6 +35,7 @@ class Game
     sf::Font MyFont;
     sf::Texture texturePU;
     sf::Sprite spritePU;
+    int temps = 10;
 };
 
 #endif

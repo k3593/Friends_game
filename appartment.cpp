@@ -67,6 +67,11 @@ void Appartment::calculScore(Player& nom)
       }
     //cout << "score de " << nom.getName()<<" dans " << rooms[i].getName()<< " : " << nom.getScore() << endl;
   }
+  cout << "taille sac"<< nom.getMyObjets().size() <<endl;
+  for(j=0; j<nom.getMyObjets().size(); j++){
+    cout << "taille sac"<< nom.getMyObjets().size() <<endl;
+    nom.setScore(nom.getScore() + nom.getMyObjets()[j].getScore());
+  }
   //cout << "score de " << nom.getName()<< " : " << nom.getScore() << endl;
 }
 
@@ -81,9 +86,29 @@ void Appartment::inRoom(Player& player){
       int posYPlayer = player.getY();
       int posXRoom = rooms[i].getX();
       int posYRoom = rooms[i].getY();
-      int posLocalPlayerX = (posXPlayer - posXRoom) + player.getW()/2 ;
-      int posLocalPlayerY = (posYPlayer - posYRoom) + player.getH()/2 ;
+      int posLocalPlayerX = (posXPlayer - posXRoom) + player.getW()/2;
+      int posLocalPlayerY = (posYPlayer - posYRoom) + player.getH()/2;
 
+      //SetScore
+      for (int k=0; k<rooms[i].getObjets().size(); k++)
+      {
+        //verification de la Position
+        /*
+        cout << posXPlayer << endl;
+        cout << posYPlayer << endl;
+        cout << rooms[i].getObjets()[k].getX() << endl;
+        cout << rooms[i].getObjets()[k].getY() << endl;
+        */
+        if(rooms[i].getObjets()[k].getX()-10 < posXPlayer && posXPlayer < rooms[i].getObjets()[k].getX()+10 && rooms[i].getObjets()[k].getY()-10 < posYPlayer && posYPlayer < rooms[i].getObjets()[k].getY()+10){
+          //Ajouter l'objet dans le sac à dos du joueur
+          player.addObjet(rooms[i].getObjets()[k]);
+
+          cout << "avan" << player.getMyObjets().size()<<endl;
+          //Supprimer l'objet de la salle
+          rooms[i].getObjets().clear();
+          cout << "après"<< player.getMyObjets().size()<<endl;
+        }
+      }
       //cout << "posLocalPlayerX"<< posLocalPlayerX << endl;
       //cout << "posLocalPlayerY"<< posLocalPlayerY << endl;
       for (int k=0; k<rooms[i].getC(); k++)
@@ -112,5 +137,6 @@ void Appartment::affichage(sf::RenderWindow& window){
   {
       rooms[i].affichage(window);
       rooms[i].affichageDoors(window);
+      rooms[i].affichageObjets(window);
   }
 }

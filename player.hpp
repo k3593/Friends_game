@@ -8,6 +8,7 @@
 
 #include "gameElement.hpp"
 #include "room.hpp"
+#include "objet.hpp"
 
 using namespace std;
 
@@ -27,13 +28,16 @@ class Player : public GameElement
     Room getRoom() {return this->room ;}
     int getW() {return this->w;}
     int getH() {return this->h;}
+    vector<Objet>& getMyObjets() {return this->myObjects;}
     //update position
     void update(int x, int y);
+    void addObjet(Objet objet_name);
   protected:
     int score;
     sf::Texture texture;
     sf::Sprite sprite;
     Room room{10, 10, 120, 370, 120, 120, "Bedroom_chandler"};
+    vector<Objet> myObjects;
 };
 
 #endif

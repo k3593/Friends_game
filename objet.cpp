@@ -21,21 +21,15 @@ Objet::Objet(string name, string filename)
 
     //Generation du sprite
     sf::Texture image;
-    if(!image.loadFromFile("filename"))
+    if(!image.loadFromFile(filename))
     {
         throw std::runtime_error("impossible de charger image de l'objet bonus");
     }
     this->texture = image;
     sf::Sprite spriteImage;
-        spriteImage.setTexture(this->texture);
+    spriteImage.setTexture(this->texture);
     this->sprite = spriteImage;
 
     cout << "Fin de création l'objet" << endl;
 }
 Objet::~Objet() {}
-
-void Objet::affichage(sf::RenderWindow& window)
-{
-    sprite.setPosition(this->x, this->y);
-    window.draw(this->sprite);
-}

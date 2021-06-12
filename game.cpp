@@ -2,6 +2,7 @@
 #include "gameElement.hpp"
 #include "appartment.hpp"
 #include "menu.hpp"
+#include "bonus.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -23,11 +24,14 @@ Game::Game()
   Door door2_room3(240, 360+20, 20, 0, "door2", 90, 0);
   Door door3_room3(240, 360+140, 20, 0, "door2", 90, 0);
   Door door4_room3(240+140, 360, 40, 0, "door2", 180, 1);
+  //création du premier objet
+  Bonus bonus1(240+10, 360+10);
   Room room3(10, 10, 240, 360, 240, 160, "Living");
   room3.addDoor(door1_room3);
   room3.addDoor(door2_room3);
   room3.addDoor(door3_room3);
   room3.addDoor(door4_room3);
+  room3.addObjet(bonus1);
 
   //Création de la quatrième pièce
   Door door1_room10(500+90, 400+20, 20, 0, "door1", 90, 2);
@@ -189,10 +193,10 @@ void Game::initChrono()
   time.setFillColor(sf::Color::Black);
 }
 
-void Game::updateText()
+void Game::updateText(int score1, int score2)
 {
   std::stringstream ss;
-  ss <<"Points de Monica : "<<  appart.getPlayer(0).getScore() <<"\n" << "Points de Joey : "<< appart.getPlayer(1).getScore() ;
+  ss <<"Points de Monica : "<<  score1 <<"\n" << "Points de Joey : "<< score2 ;
   //cout << ss.str() <<endl;
   this->text.setString(ss.str());
 }
@@ -200,7 +204,7 @@ void Game::updateText()
 void Game::updateChrono(sf::Clock chrono)
 {
   std::stringstream ss;
-  ss <<"Temps : "<<  45-chrono.getElapsedTime().asSeconds() ;
+  ss <<"Temps : "<<  temps-chrono.getElapsedTime().asSeconds() ;
   //cout << ss.str() <<endl;
   this->time.setString(ss.str());
 }
@@ -240,8 +244,10 @@ void Game::play()
   appart.calculScore(appart.getPlayer(0));
   appart.calculScore(appart.getPlayer(1));
 
-  appart.calculScore(p1);
-  appart.calculScore(p2);
+  //appart.calculScore(p1);
+  //appart.calculScore(p2);
+
+  cout<<"gloabl"<<p1.getMyObjets().size()<<endl;
 
   sf::RenderWindow window_game(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
   window_game.setIcon(225, 225,icone.getPixelsPtr());
@@ -300,7 +306,7 @@ void Game::play()
             updateFPS2=false;//sinon on ne l'a fait pas
         }
     }
-    if(chrono.getElapsedTime().asSeconds()<10)
+    if(chrono.getElapsedTime().asSeconds()<temps)
     {
       sf::Vector2f posMonica = p1.getSprite().getPosition();
       sf::Vector2f posJoey = p2.getSprite().getPosition();
@@ -395,10 +401,19 @@ void Game::play()
       p2.setSprite(s2);
 
       //calcul du score
+      /*
       for(int i=0; i<2; i++)
         appart.calculScore(appart.getPlayer(i));
 
-      updateText();
+      */
+
+      appart.calculScore(p1);
+      appart.calculScore(p2);
+
+      cout<<"gloabl"<<p1.getMyObjets().size()<<endl;
+      cout<<"gloabl2"<<appart.getPlayer(0).getMyObjets().size()<<endl;
+
+      updateText(p1.getScore(), p2.getScore());
       updateChrono(chrono);
       window_game.clear();
       appart.inRoom(p1);

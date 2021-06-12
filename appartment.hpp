@@ -10,6 +10,7 @@
 #include "room.hpp"
 #include "gameElement.hpp"
 #include "player.hpp"
+#include "objet.hpp"
 
 using namespace std;
 

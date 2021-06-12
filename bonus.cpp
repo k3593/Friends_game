@@ -10,8 +10,11 @@ using namespace std;
 
 
 //Constructeur Bonus
-Bonus::Bonus() : Objet("bonus", "bonus.png")
+Bonus::Bonus(int x, int y) : Objet("bonus", "bonus.png")
 {
+    this->x = x;
+    this->y = y;
     this->score = 10;
+    sprite.setPosition(this->x, this->y);
     return;
 }

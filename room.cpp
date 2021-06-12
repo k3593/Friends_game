@@ -113,6 +113,13 @@ void Room::affichageDoors(sf::RenderWindow& window){
   }
 }
 
+void Room::affichageObjets(sf::RenderWindow& window){
+  for (int i=0; i<objets.size(); i++)
+  {
+    window.draw(this->objets[i].getObjetAff());
+  }
+}
+
 void Room::addDoor(Door& door_name){
   this->doors.push_back(door_name);
 }
