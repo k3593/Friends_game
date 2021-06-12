@@ -4,7 +4,8 @@ RM=rm -f
 CFLAGS=-Wall -std=c++17
 LDFLAGS=-Wall -std=c++17
 
-all : main tests_catch
+#all : main tests_catch
+all : main
 
 main : main.o gameElement.o player.o room.o appartment.o game.o menu.o door.o objet.o bonus.o
 	g++ -Wall -o main main.o gameElement.o room.o player.o appartment.o game.o menu.o door.o objet.o bonus.o -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
