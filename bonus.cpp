@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
+#include "bonus.hpp"
+
 
 //Constructeur Bonus
 Bonus::Bonus() : Objet("bonus", "bonus.png")
