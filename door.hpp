@@ -13,7 +13,7 @@ class Door : public GameElement
     sf::RectangleShape getDoor() {return door;}
     int getAngle() {return angle;}
     int getCote() {return cote;}
-  private:
+  protected:
     sf::RectangleShape door;
     int angle = 0;
     // 0 = gauche, 1 = haut, 2 = droite, 3 = bas

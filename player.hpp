@@ -22,12 +22,12 @@ class Player : public GameElement
     //getters
     sf::Sprite& getSprite() {return this->sprite;}
     void setSprite(sf::Sprite s) {this->sprite=s;}
-    int getScore() {return this->score;}
+    int const getScore() {return this->score;}
     void setScore(int s) {this->score=s;}
     void setRoom(Room room_name) {this->room = room_name;}
     Room getRoom() {return this->room ;}
-    int getW() {return this->w;}
-    int getH() {return this->h;}
+    int const getW() {return this->w;}
+    int const getH() {return this->h;}
     vector<Objet>& getMyObjets() {return this->myObjects;}
     //update position
     void update(int x, int y);
