@@ -2,8 +2,8 @@
 
 using namespace std;
 
-//Constructeur Player
-Door::Door(int x, int y, int w, int h, string nom, int ang, int cot)
+//Constructeur de Door
+Door::Door(const int x, const int y, const int w, const int h, const string nom,const int ang, const int cot)
 {
   this->x = x;
   this->y = y;

@@ -9,10 +9,13 @@ using namespace std;
 class Door : public GameElement
 {
   public:
-    Door(int x, int y, int w, int h, string nom, int ang, int cot);
-    sf::RectangleShape getDoor() {return door;}
-    int getAngle() {return angle;}
-    int getCote() {return cote;}
+    //constructeur
+    Door(const int x,const int y,const int w, const int h, const string nom,const int ang, const int cot);
+
+    //accesseur
+    const sf::RectangleShape getDoor() const {return door;}
+    int const getAngle() const {return angle;}
+    int const getCote() const {return cote;}
   protected:
     sf::RectangleShape door;
     int angle = 0;

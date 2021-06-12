@@ -16,11 +16,11 @@ class Game
     Game();
     void menu();
     void play();
-    void popUp(string titre, string image);
+    void popUp(const string titre, const string image);
     void initFonts();
     void initText();
     void initChrono();
-    void updateText(int score1, int score2);
+    void updateText(const int score1,const int score2);
     void updateChrono(sf::Clock chrono);
   private:
     sf::Music music;
@@ -35,7 +35,7 @@ class Game
     sf::Font MyFont;
     sf::Texture texturePU;
     sf::Sprite spritePU;
-    int temps = 40;
+    int temps = 40;//temps de jeu
 };
 
 #endif

@@ -23,17 +23,16 @@ Game::Game()
   Door door1_room3(240+240, 360+60, 20, 0, "door1", 90, 2);
   Door door2_room3(240, 360+20, 20, 0, "door2", 90, 0);
   Door door3_room3(240, 360+140, 20, 0, "door2", 90, 0);
-  Door door4_room3(240+140, 360, 40, 0, "door2", 180, 1);
-  //création du premier objet
-  //Objet bonus1("bonus", "bonus.png", 240+10, 360+10);
+  Door door4_room3(240+140, 360, 40, 0, "door2", 180, 1); 
   Room room3(10, 10, 240, 360, 240, 160, "Living");
   room3.addDoor(door1_room3);
   room3.addDoor(door2_room3);
   room3.addDoor(door3_room3);
-  room3.addDoor(door4_room3);
+  room3.addDoor(door4_room3); 
+  
+  //création du premier objet
   Objet* bonus1 = new Objet("bonus", "bonus.png", 240+10, 360+10);
   room3.addObjet(bonus1);
-  //room3.addObjet(bonus1);
 
   //Création de la quatrième pièce
   Door door1_room10(500+90, 400+20, 20, 0, "door1", 90, 2);
@@ -78,9 +77,9 @@ Game::Game()
   Room room9(6, 6, 360, 205, 80, 60, "Bathroom_Joey");
   room9.addDoor(door1_room9);
   cout << "Initialisation appart terminée" << endl;
+  
   //Remplissage de l'appartement avec les pièces
   appart.addRoom(room1);
-
   appart.addRoom(room2);
   appart.addRoom(room3);
   appart.addRoom(room4);
@@ -92,11 +91,12 @@ Game::Game()
   appart.addRoom(room10);
   cout << "Initialisation appart terminée" << endl;
 
+  //icone de la fenetre
   if(!icone.loadFromFile("icone.png"))
   {
     throw std::runtime_error("impossible de charger image de l'icone");
   }
-
+  //initialisations pour la police, les scores et le chrono
   initFonts();
   initText();
   initChrono();
@@ -107,15 +107,17 @@ Game::Game()
   music_monica.openFromFile("monica.ogg");
 }
 
+//gestion du menu
 void Game::menu()
 {
   sf::RenderWindow window_menu(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
-
   window_menu.setIcon(225, 225,icone.getPixelsPtr());
+  
   //Création du menu
   Menu menu(window_menu.getSize().x, window_menu.getSize().y);
 
   music.play();
+  //gestion des evenements
   while (window_menu.isOpen())
   {
       sf::Event event;
@@ -171,6 +173,7 @@ void Game::menu()
   }
 }
 
+//initialisation de la police d'écriture
 void Game::initFonts()
 {
   // Chargement de la police à partir d'un fichier
@@ -180,6 +183,8 @@ void Game::initFonts()
       throw std::runtime_error("impossible de charger la police");
     }
 }
+
+//initialisation des textes pour le score
 void Game::initText()
 {
   text.setFont(MyFont);
@@ -188,6 +193,7 @@ void Game::initText()
   text.setFillColor(sf::Color::Red);
 }
 
+//initialisation des textes pour le chrono
 void Game::initChrono()
 {
   time.setFont(MyFont);
@@ -197,7 +203,8 @@ void Game::initChrono()
   time.setFillColor(sf::Color::Black);
 }
 
-void Game::updateText(int score1, int score2)
+//mise à jour des scores
+void Game::updateText(const int score1, const int score2)
 {
   std::stringstream ss;
   ss <<"Points de Monica : "<<  score1 <<"\n" << "Points de Joey : "<< score2 ;
@@ -205,6 +212,7 @@ void Game::updateText(int score1, int score2)
   this->text.setString(ss.str());
 }
 
+//mise à jour du chrono
 void Game::updateChrono(sf::Clock chrono)
 {
   std::stringstream ss;
@@ -212,7 +220,9 @@ void Game::updateChrono(sf::Clock chrono)
   //cout << ss.str() <<endl;
   this->time.setString(ss.str());
 }
-void Game::popUp(string titre, string image)
+
+//affichage des fenêtres pop-up
+void Game::popUp(const string titre, const string image)
 {
   sf::RenderWindow window_popUp(sf::VideoMode(windowWidht, windowHeight), titre);
   while (window_popUp.isOpen())
@@ -234,24 +244,25 @@ void Game::popUp(string titre, string image)
     window_popUp.draw(spriteBackground);
     window_popUp.display();
   }
-
 }
 
+//gestion du jeu
 void Game::play()
 {
+  //reset de la map
+  for(int i=0; i<appart.getRooms().size();i++)
+    appart.getRooms()[i].reset();
+
   //Création des joueurs
   Player p1(140, 370, 144, 192, "monica", "monica.png", appart.getRoom(1));
   Player p2(140, 370, 144, 192, "joey", "joey.png", appart.getRoom(1));
   appart.addPlayer(p1);
   appart.addPlayer(p2);
 
+  //calcul des scores
   appart.calculScore(appart.getPlayer(0));
   appart.calculScore(appart.getPlayer(1));
 
-  //appart.calculScore(p1);
-  //appart.calculScore(p2);
-
-  cout<<"gloabl"<<p1.getMyObjets().size()<<endl;
 
   sf::RenderWindow window_game(sf::VideoMode(windowWidht, windowHeight), "Jeu Friends");
   window_game.setIcon(225, 225,icone.getPixelsPtr());
@@ -269,15 +280,14 @@ void Game::play()
   sf::Clock time3;
   sf::Clock chrono;
 
-
   //sounds
-
   sf::SoundBuffer buffer;
   buffer.loadFromFile("pas.wav");
 
   sf::Sound sound;
   sound.setBuffer(buffer);
 
+  //boucle du jeu
   while (window_game.isOpen())
   {
     sf::Event event;
@@ -297,12 +307,14 @@ void Game::play()
 
         if(event.type=sf::Event::KeyPressed)//si une touche est pressée
         {
+          //gestion de p1
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)
           ||sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             updateFPS1=true;//on fait l'animation
           else
             updateFPS1=false;//sinon on ne l'a fait pas
 
+          //gestion de p2
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)
           ||sf::Keyboard::isKeyPressed(sf::Keyboard::D) ||sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
             updateFPS2=true;//on fait l'animation
@@ -310,10 +322,12 @@ void Game::play()
             updateFPS2=false;//sinon on ne l'a fait pas
         }
     }
+    //tant que le temps de jeu n'est pas finit
     if(chrono.getElapsedTime().asSeconds()<temps)
     {
       sf::Vector2f posMonica = p1.getSprite().getPosition();
       sf::Vector2f posJoey = p2.getSprite().getPosition();
+      
       //monica
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
       {
@@ -366,37 +380,39 @@ void Game::play()
               posJoey.x = posJoey.x;
               posJoey.y = posJoey.y + 1;
       }
-      //animation
-      if(updateFPS1==true)
+
+      //animations et sons
+      if(updateFPS1==true)//pour monica (p1)
       {
-        if(time1.getElapsedTime().asMilliseconds() >= 50)
+        if(time1.getElapsedTime().asMilliseconds() >= 50)//animation
         {
           anim1.x++;
           if(anim1.x*48 >= p1.getW()*3)
               anim1.x=0;
           time1.restart();
         }
-        if(time3.getElapsedTime().asMilliseconds() >= 500)
+        if(time3.getElapsedTime().asMilliseconds() >= 500)//son
         {
           sound.play();
           time3.restart();
         }
       }
-      if(updateFPS2==true)
+      if(updateFPS2==true)//pour Joey (p2)
       {
-        if(time2.getElapsedTime().asMilliseconds() >= 50)
+        if(time2.getElapsedTime().asMilliseconds() >= 50)//animation
         {
           anim2.x++;
           if(anim2.x*48 >= p2.getW()*3)
               anim2.x=0;
           time2.restart();
         }
-        if(time3.getElapsedTime().asMilliseconds() >= 500)
+        if(time3.getElapsedTime().asMilliseconds() >= 500)//son
         {
           sound.play();
           time3.restart();
         }
       }
+      //selection de la bonne partie de l'image pr l'animation
       sf::Sprite s1=p1.getSprite();
       s1.setTextureRect(sf::IntRect(anim1.x*48, anim1.y*48, 48, 48));
       p1.setSprite(s1);
@@ -404,41 +420,36 @@ void Game::play()
       s2.setTextureRect(sf::IntRect(anim2.x*48, anim2.y*48, 48, 48));
       p2.setSprite(s2);
 
-      //calcul du score
-      /*
-      for(int i=0; i<2; i++)
-        appart.calculScore(appart.getPlayer(i));
-
-      */
-
+      //calcul du score des joueurs
       appart.calculScore(p1);
       appart.calculScore(p2);
 
-      cout<<"gloabl"<<p1.getMyObjets().size()<<endl;
-      cout<<"gloabl2"<<appart.getPlayer(0).getMyObjets().size()<<endl;
-
+    
+      //affichage
       updateText(p1.getScore(), p2.getScore());
       updateChrono(chrono);
+      
       window_game.clear();
+      
       appart.inRoom(p1);
       appart.inRoom(p2);
+      
       p1.update(posMonica.x, posMonica.y);
       p2.update(posJoey.x, posJoey.y);
 
       window_game.draw(appart.getSprite());
       appart.affichage(window_game);
 
-      //window_game.draw(appart.get)
       window_game.draw(p1.getSprite());
       window_game.draw(p2.getSprite());
       window_game.draw(text);
       window_game.draw(time);
       window_game.display();
     }
-    else
+    else//si le temps de jeu est finit
     {
-      //music.stop();
-      if(appart.getPlayer(0).getScore()>appart.getPlayer(1).getScore())
+      //annonce du gagnant
+      if(p1.getScore()>p2.getScore())
       {
         music.stop();
         music_monica.play();

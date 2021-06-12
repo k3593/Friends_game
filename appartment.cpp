@@ -11,7 +11,7 @@ using namespace std;
 
 
 //Constructeur Appartment
-Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
+Appartment::Appartment(const int x, const int y, const int w, const int h, const string nom, const string filename)
 {
   cout << "Initialisation d'un appartement" << endl;
   this->x = x;
@@ -34,17 +34,20 @@ Appartment::Appartment(int x, int y, int w, int h, string nom, string filename)
   cout << "Fin de l'initialisation d'un appartement" << endl;
 }
 
+//ajout d'une salle
 void Appartment::addRoom(Room& nom){
   this->rooms.push_back(nom);
   cout << "Ajout de la pièce terminé" << endl;
 }
 
+//ajout d'un joueur
 void Appartment::addPlayer(Player& nom){
   this->players.push_back(nom);
   cout << "Ajout du joueur terminé" << endl;
 }
 
-void Appartment::calculScore(Player& nom)
+//calcul du score d'un joueur
+void Appartment::calculScore(Player& nom) 
 {
   int i,j,k;
   nom.setScore(0);
@@ -89,28 +92,18 @@ void Appartment::inRoom(Player& player){
       int posLocalPlayerX = (posXPlayer - posXRoom) + player.getW()/2;
       int posLocalPlayerY = (posYPlayer - posYRoom) + player.getH()/2;
 
-      //SetScore
+      //si un utilisateur est sur un des objets on lui rajoute à son attribut myObjets
       for (int k=0; k<rooms[i].getObjets().size(); k++)
       {
         //verification de la Position
-        /*
-        cout << posXPlayer << endl;
-        cout << posYPlayer << endl;
-        cout << rooms[i].getObjets()[k].getX() << endl;
-        cout << rooms[i].getObjets()[k].getY() << endl;
-        */
         if(rooms[i].getObjets()[k]->getX()-10 < posXPlayer && posXPlayer < rooms[i].getObjets()[k]->getX()+10 && rooms[i].getObjets()[k]->getY()-10 < posYPlayer && posYPlayer < rooms[i].getObjets()[k]->getY()+10){
           //Ajouter l'objet dans le sac à dos du joueur
           player.addObjet(*rooms[i].getObjets()[k]);
-
-          cout << "avan" << player.getMyObjets().size()<<endl;
           //Supprimer l'objet de la salle
           rooms[i].getObjets().clear();
-          cout << "après"<< player.getMyObjets().size()<<endl;
         }
       }
-      //cout << "posLocalPlayerX"<< posLocalPlayerX << endl;
-      //cout << "posLocalPlayerY"<< posLocalPlayerY << endl;
+
       for (int k=0; k<rooms[i].getC(); k++)
       {
         for (int j=0; j<rooms[i].getL(); j++)
@@ -132,6 +125,7 @@ void Appartment::inRoom(Player& player){
   }
 }
 
+//affichage de l'appartement dans la fenetre
 void Appartment::affichage(sf::RenderWindow& window){
   for (int i=0; i<this->rooms.size(); i=i+1)
   {

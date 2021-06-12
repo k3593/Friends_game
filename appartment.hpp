@@ -20,7 +20,7 @@ class Appartment : public GameElement
 {
   public:
     //constructeurs
-    Appartment(int x, int y, int w, int h, string nom, string fileName);
+    Appartment(const int x, const int y, const int w, const int h, const string nom, const string fileName);
     Appartment();
     // destructeur
     ~Appartment() {}
@@ -28,10 +28,10 @@ class Appartment : public GameElement
     void addPlayer(Player& nom);
     void calculScore(Player& nom);
     //getters
-    sf::Sprite& getSprite() {return this->sprite;}
-    Player& getPlayer (int i) {return players[i];}
-    Room getRoom(int index) {return this->rooms[index];}
-    vector<Room> getRooms() {return this->rooms;}
+    const sf::Sprite& getSprite() const {return this->sprite;}
+    Player& getPlayer (const int i)  {return players[i];}
+    const Room getRoom(const int index) const {return this->rooms[index];}
+    vector<Room> getRooms() const {return this->rooms;}
     //Verifier dans quelle pièce le joueur est.
     void inRoom(Player& player);
     //affichage appartement

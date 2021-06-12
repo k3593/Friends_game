@@ -14,11 +14,11 @@ class GameElement
     //constructeurs
     GameElement() {}
     virtual ~GameElement() = 0;
-    int getX() {return this->x;}
-    int getY() {return this->y;}
-    int getW() {return this->w;}
-    int getH() {return this->h;}
-    string getName() {return this->nom;}
+    const int getX() const {return this->x;}
+    const int getY() const {return this->y;}
+    const int getW() const {return this->w;}
+    const int getH() const {return this->h;}
+    const string getName() const {return this->nom;}
 
   protected:
     int x; //Coordonnées x de l'origine

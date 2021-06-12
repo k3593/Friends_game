@@ -30,8 +30,7 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   rectangle.setFillColor(sf::Color::Transparent);
   this->rectangle = rectangle;
 
-  int i,j;
-  int cpt=0;//compteur de rouge
+  int i;
 
   //déclaration de la matrice
   data = new sf::RectangleShape*[this->c];
@@ -39,9 +38,15 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
   {
     data[i] = new sf::RectangleShape[this->l];
   }
+
+  cout << "Fin de l'initialisation d'une pièce" << endl;
+}
+void Room::reset()
+{
+  int i,j;
+  int cpt=0;//compteur de gris
+  
   //initialisation de la matrice
-  //sf::Color blacko(192, 192, 192);
-  //blacko.a=192;
   for ( i=0; i<this->c; i++)
   {
     for ( j=0; j<this->l; j++)
@@ -53,7 +58,8 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
       rectangle.setPosition(x+i*(w/c), y+j*(h/l));
       rectangle.setFillColor(sf::Color::Transparent);
       data[i][j] = rectangle;
-
+      
+      //on remplit aléatoirement
       int k=rand()%2;
       if (k==1)
       {
@@ -64,38 +70,32 @@ Room::Room(int l, int c, int x, int y, int w, int h, string nom)
         data[i][j].setFillColor(sf::Color::Transparent);
     }
   }
-
+  //on égalise le nombre de case grise et transparente
   int nb=(int)((this->c*this->l)/2);
-  //cout << nb << endl;
-  //cout << cpt << endl;
   while ((cpt!=nb))// si il n'y a pas environ autant de 0 que de 1
   {
     int nl=rand()%l;
     int nc=rand()%c;
-    if ((cpt<=(nb-1)))//si il y a plus de blanc que de rouge
+    if ((cpt<=(nb-1)))//si il y a plus de transp que de gris
     {
       if (data[nl][nc].getFillColor()==sf::Color::Transparent)
       {
         data[nl][nc].setFillColor(sf::Color(105, 105, 105, 192));
         cpt++;
-        //cout << cpt << endl;
       }
     }
-    else if ((cpt>=(nb+1)))//si il y a plus de rouge que de blanc
+    else if ((cpt>=(nb+1)))//si il y a plus de gris que de transp
     {
       if (data[nl][nc].getFillColor()==sf::Color(105, 105, 105, 192))
       {
         data[nl][nc].setFillColor(sf::Color::Transparent);
         cpt--;
-        //cout << cpt << endl;
       }
     }
-    //cout << cpt << endl;
   }
-
-  cout << "Fin de l'initialisation d'une pièce" << endl;
 }
 
+//méthode d'affichage de la room
 void Room::affichage(sf::RenderWindow& window){
   for (int i=0; i<this->l; i=i+1)
   {
@@ -106,6 +106,7 @@ void Room::affichage(sf::RenderWindow& window){
   }
 }
 
+//méthode d'affichage des portes
 void Room::affichageDoors(sf::RenderWindow& window){
   for (int i=0; i<doors.size(); i++)
   {
@@ -113,6 +114,7 @@ void Room::affichageDoors(sf::RenderWindow& window){
   }
 }
 
+//méthode d'affichage des objets
 void Room::affichageObjets(sf::RenderWindow& window){
   for (int i=0; i<objets.size(); i++)
   {
@@ -120,10 +122,12 @@ void Room::affichageObjets(sf::RenderWindow& window){
   }
 }
 
+//ajout d'une porte à l'attribut doors de room
 void Room::addDoor(Door& door_name){
   this->doors.push_back(door_name);
 }
 
+//ajout d'un objet à l'attribut objets de room
 void Room::addObjet(Objet* objet_name){
   this->objets.push_back(objet_name);
 }

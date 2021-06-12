@@ -25,15 +25,15 @@ class Room : public GameElement
     void affichageDoors(sf::RenderWindow& window);
     void affichageObjets(sf::RenderWindow& window);
     //getters
-    int getL() {return this->l;}
-    int getC() {return this->c;}
-    string getName() {return this->nom;}
-    vector<Door> getDoors() {return this->doors;}
-    vector<Objet*>& getObjets() {return this->objets;}
-    sf::Color getDataColor (const int i, const int j) {return data[i][j].getFillColor();}
-    sf::RectangleShape& getRectangle() {return this->rectangle;}
+    const int getL() const {return this->l;}
+    const int getC() const {return this->c;}
+    const string getName() const {return this->nom;}
+    const vector<Door> getDoors() const {return this->doors;}
+    vector<Objet*>& getObjets()  {return this->objets;}
+    const sf::Color getDataColor (const int i, const int j) const {return data[i][j].getFillColor();}
+    const sf::RectangleShape& getRectangle() const {return this->rectangle;}
 
-    sf::RectangleShape& operator() (int i, int j){
+    sf::RectangleShape& operator() (const int i, const int j){
       if(i > this->c || j > this->l){
         throw std::out_of_range("ERREUR : Vous essayez d'acceder à un élément en dehors de la matrice !");
       }
@@ -41,8 +41,11 @@ class Room : public GameElement
         return this->data[i][j];
       }
     }
+    //ajout de porte et d'objets 
     void addDoor(Door& door_name);
     void addObjet(Objet* objet_name);
+    //réinisialisation de la map
+    void reset();
 
   protected:
     int l; //nombre de lignes
