@@ -35,7 +35,7 @@ class Game
     sf::Font MyFont;
     sf::Texture texturePU;
     sf::Sprite spritePU;
-    int temps = 10;
+    int temps = 40;
 };
 
 #endif
